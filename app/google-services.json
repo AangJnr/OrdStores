@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "69826721483",
+    "firebase_url": "https://ordstores-56992.firebaseio.com",
+    "project_id": "ordstores-56992",
+    "storage_bucket": "ordstores-56992.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69826721483:android:ef5a66a8af945065",
+        "android_client_info": {
+          "package_name": "com.shop.ordstore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69826721483-2mlvl4nv6rb0a7nl0dc5q7sq9igj2pi4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shop.ordstore",
+            "certificate_hash": "D778FDE9E533E2ADC66BC98D009712FF25E1BDF4"
+          }
+        },
+        {
+          "client_id": "69826721483-vvm2cqb1u7ftvnao3ijmqnta5mgqi4it.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBigebdBkZdHOdHg5MM4IOwEkth63CCCTM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69826721483-vvm2cqb1u7ftvnao3ijmqnta5mgqi4it.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

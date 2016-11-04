@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.shop.ordstore"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-sdk tools:overrideLibrary="com.amqtech.permissions.helper"/>
+
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+        android:theme="@style/AppTheme">
+
+        <provider
+            android:name=".Search.StoresContentProvider"
+            android:authorities="com.shop.ordstore.Search.StoresContentProvider"
+            android:enabled="true"
+            android:exported="true"/>
+
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/AppThemeSplashScreen">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".SignUpClasses.SignUpActivity"
+            android:theme="@style/LoginTheme"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".UserClasses.MainActivity"
+            android:label=""
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
+            android:name=".UserClasses.StarredOrders"
+            android:theme="@style/AppTheme">
+        </activity>
+
+
+        <activity
+            android:name=".StoresListClasses.StoresListActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme">
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
+
+
+        <activity
+            android:name=".introslides.AppTourPermissions"
+            android:theme="@style/AppTheme">
+        </activity>
+
+
+        <activity
+            android:name=".MerchantClasses.MerchantMainActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
+            android:name=".StoreProductList.StoreProductListActivity"
+            android:theme="@style/AppTheme">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".UserClasses.MainActivity" />
+        </activity>
+
+
+        <activity
+            android:name=".StoreProductList.ExpandedView"
+            android:theme="@style/Theme.AppCompat.Translucent">
+
+        </activity>
+
+
+
+        <service android:name=".UserClasses.OrdServiceRevised"
+                    android:theme="@style/AppTheme"
+                    android:windowSoftInputMode="stateVisible"
+                    ></service>
+
+        <service android:name=".UserClasses.UserService"
+            android:persistent="true"
+
+            ></service>
+
+
+        <service
+
+            android:name=".UserClasses.UserTokenService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".UserClasses.UserMessageReceiverService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service android:name=".MerchantClasses.MerchantService"
+            android:persistent="true"
+
+            ></service>
+
+        <service
+            android:name=".MerchantClasses.MerchantTokenService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".MerchantClasses.MerchantMessageReceiverService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+    </application>
+
+</manifest>

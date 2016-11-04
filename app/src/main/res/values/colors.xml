@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#1b8f63</color>
+    <color name="colorPrimaryDark">#1a6e4e</color>
+
+
+  <!--  <color name="colorPrimary">#4CAF50</color>
+    <color name="colorPrimaryDark">#388E3C</color>-->
+    <color name="colorAccent">#fff2c83f</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="tab_text_selected">@color/colorAccent</color>
+    <color name="fab_pressed">#c6ffe38b</color>
+    <color name="fab_mini_buttons">#898989</color>
+    <color name="tab_text">#c2ededed</color>
+    <color name="text_color">#ffffff</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="login_tab_text">#ff313131</color>
+    <color name="login_screen_statusbar_color">@color/colorPrimaryDark</color>
+    <color name="edittext_base_color">#707070</color>
+    <color name="edittext_primaryColor">#27b780</color>
+    <color name="edittext_error_color">#cf4149</color>
+    <color name="yellow_bar_disabled">#9f9f9f</color>
+    <color name="material_icon_colors">#9E9E9E</color>
+    <color name="divider">#ffc2c2c2</color>
+
+    <color name="background_card">#fff</color>
+    <color name="background_snackbar">#323232</color>
+
+    <color name="text_black_87">#d0000000</color>
+    <color name="text_white_87">#deFFFFFF</color>
+    <color name="text_white_75">#87ececec</color>
+
+    <color name="drawable_grey">#555b55</color>
+    <color name="viewBg">#f1f5f8</color>
+
+    <color name="customButtonNormal">#00ececec</color>
+
+    <color name="customButtonPressed">#5acacaca</color>
+    <color name="customButtonFocused">#3ea1a1a1</color>
+
+</resources>

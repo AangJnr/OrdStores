@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="3dp"
+    card_view:cardCornerRadius="0dp">
+
+
+
+
+<com.shop.ordstore.ExpandableItemLayout
+    android:id="@+id/cv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       android:padding="16dp">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:layout_marginRight="12dp"
+           android:layout_marginBottom="16dp"
+           >
+
+
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginBottom="8dp"
+               android:orientation="horizontal">
+
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Order details"
+                   android:textColor="@color/colorPrimary"
+                   android:textSize="12sp"
+                   android:textStyle="italic"
+                   />
+
+
+               <TextView
+                   android:id="@+id/po_timestamp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="8dp"
+                   android:text="0/0/2016"
+                   android:textSize="12sp"
+                   android:fontFamily="sans-serif-smallcaps"
+                   />
+           </LinearLayout>
+
+
+
+
+
+
+
+           <RelativeLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:orientation="vertical"
+               android:layout_marginTop="4dp"
+               >
+
+
+               <TextView
+                   android:id="@+id/buyers_name"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Name of buyer"
+                   android:textColor="@color/text_black_87"
+                   />
+
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:layout_centerVertical="true"
+                   android:layout_toRightOf="@id/buyers_name"
+                   android:layout_marginLeft="12dp">
+
+                   <View
+                       android:layout_width="2dp"
+                       android:layout_height="2dp"
+                       android:layout_marginRight="2dp"
+                       android:background="@color/colorPrimary"
+                       android:layout_gravity="center_vertical"/>
+
+                   <TextView
+                       android:id="@+id/buyer_phone"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textSize="10sp"
+                       android:fontFamily="sans-serif-smallcaps"
+                       android:text="Phone"/>
+               </LinearLayout>
+
+
+
+           </RelativeLayout>
+
+
+
+
+       </LinearLayout>
+
+
+       <View
+           android:layout_width="match_parent"
+           android:layout_height="0.5dp"
+           android:text="Order Summary"
+           android:background="#4f3d3d3d"
+           />
+
+    <RelativeLayout
+    android:id="@+id/user_creds_relative_layout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="12dp"
+    >
+
+
+
+
+   <ImageView
+       android:id="@+id/pdt_image"
+       android:layout_width="110dp"
+       android:layout_height="match_parent"
+       android:src="@drawable/shirt"
+       android:scaleType="centerCrop"/>
+
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_toRightOf="@id/pdt_image"
+           android:layout_marginLeft="16dp"
+           android:orientation="vertical">
+
+
+
+           <TextView
+               android:id="@+id/pdt_name"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Product name"
+               android:fontFamily="sans-serif-light"
+               android:textColor="@color/text_black_87"
+               android:padding="2dp"
+               android:textSize="16sp"/>
+
+           <TextView
+               android:id="@+id/product_code"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:padding="2dp"
+               android:text="Code"
+               />
+
+           <TextView
+               android:id="@+id/pdt_quantity"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:padding="2dp"
+               android:text="Quantity"
+              />
+
+           <TextView
+               android:id="@+id/product_price"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:padding="2dp"
+               android:text="Price"
+               />
+
+       </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/product_price_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="TOTAL"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            />
+
+
+    </RelativeLayout>
+
+
+
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_gravity="end"
+           android:orientation="horizontal"
+           android:layout_marginTop="24dp"
+           >
+
+       <TextView
+           android:id="@+id/status_text"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerVertical="true"
+           android:layout_marginRight="24dp"
+           android:textSize="16sp"
+           android:fontFamily="sans-serif-condensed"
+           android:textStyle="italic"/>
+
+
+           <LinearLayout
+               android:id="@+id/buttons"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentRight="true"
+
+               >
+
+               <Button
+                   android:id="@+id/po_decline_button"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="DECLINE"
+                   android:textSize="13sp"
+                   android:layout_marginRight="12dp"
+                   android:paddingTop="8dp"
+                   android:paddingBottom="8dp"
+                   android:maxWidth="24dp"
+                   android:minHeight="12dp"
+                   android:textColor="@color/colorPrimary"
+                   android:background="@drawable/border_button_background_primary"
+                   />
+
+               <Button
+                   android:id="@+id/po_confirm_button"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="CONFIRM"
+                   android:textSize="13sp"
+                   android:paddingTop="8dp"
+                   android:paddingBottom="8dp"
+                   android:maxWidth="24dp"
+                   android:minHeight="12dp"
+                   android:textColor="@color/colorPrimary"
+                   android:background="@drawable/border_button_background_primary"
+                   />
+
+           </LinearLayout>
+
+
+           </RelativeLayout>
+
+
+
+   </LinearLayout>
+
+
+
+
+    <ImageView
+        android:id="@+id/ic_dots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_dots"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="right"
+        android:padding="4dp"
+
+        />
+
+
+
+
+
+
+
+</RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            app:canExpand="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Extra Info"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                android:layout_marginBottom="4dp"
+                android:textStyle="italic"
+                />
+
+            <TextView
+                android:id="@+id/po_extra_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="This is where the users specks will be displayed. Like extra pizza toppings and stuffs like that ya dig?"
+                />
+        </LinearLayout>
+
+
+
+
+
+
+</com.shop.ordstore.ExpandableItemLayout>
+</android.support.v7.widget.CardView>

@@ -1,0 +1,217 @@
+<RelativeLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <ImageView
+        android:id="@+id/kbv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/photo2" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#cc18160b">
+
+
+    </View>
+
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/login_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:weightSum="7"
+    app:theme="@style/LoginTheme">
+
+
+
+    <RelativeLayout
+        android:id="@+id/logo_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+
+        >
+
+
+
+        <ImageView
+            android:id="@+id/logo_white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:src="@drawable/icon_splash_screen"
+            android:padding="48dp"
+            />
+
+    </RelativeLayout>
+
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp"
+    android:layout_weight="4">
+
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/user_cred_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:orientation="vertical"
+        >
+
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/email_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/colorAccent"
+            android:textColorHint="@color/white"
+            android:theme="@style/BubbleTheme">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:drawableTint="@color/white"
+                android:drawableRight="@drawable/ic_mail_black_24dp"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:textColorHighlight="@color/colorPrimary"
+                android:textSize="16sp" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/username_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone"
+            android:backgroundTint="@color/colorAccent"
+            android:textColorHint="@color/white"
+            android:theme="@style/BubbleTheme">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Username"
+                android:drawableTint="@color/white"
+                android:drawableRight="@drawable/ic_contacts_black_24dp"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:textColorHighlight="@color/colorPrimary"
+                android:textSize="16sp" />
+        </android.support.design.widget.TextInputLayout>
+
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/password_layout"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:textColorHint="@color/white"
+            android:theme="@style/BubbleTheme">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:drawableTint="@color/white"
+                android:drawableRight="@drawable/ic_verified_user_black_24dp"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColorHighlight="@color/colorPrimary"
+                android:textSize="16sp" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottom_layout"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            >
+
+            <TextView
+                android:id="@+id/bottom_text_querry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:text="Don't have an account?"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/bottom_button"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:clickable="true"
+                android:text="SIGN UP"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp" />
+        </android.support.v7.widget.LinearLayoutCompat>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+</RelativeLayout>
+
+
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/login_fab"
+            android:layout_width="@dimen/fab_size"
+            android:layout_height="@dimen/fab_size"
+            android:layout_centerHorizontal="true"
+
+
+            android:src="@drawable/icon_arrow_right"/>
+
+    </RelativeLayout>
+
+
+
+
+</android.support.v7.widget.LinearLayoutCompat>
+
+
+</RelativeLayout>

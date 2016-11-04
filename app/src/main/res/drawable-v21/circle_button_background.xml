@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="oval">
+            <corners android:radius="3dip" />
+            <solid android:color="@color/colorAccent" />
+             </shape>
+    </item>
+
+    <ripple xmlns:android="http://schemas.android.com/apk/res/android"
+        android:color="?attr/colorControlHighlight">
+        <item android:drawable="?attr/colorPrimary"/>
+    </ripple>
+
+
+</selector>

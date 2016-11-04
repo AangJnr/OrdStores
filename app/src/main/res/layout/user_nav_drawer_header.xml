@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/drawer_header_height"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    android:background="@color/colorPrimary"
+    android:gravity="bottom"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+
+
+
+
+
+
+<de.hdodenhof.circleimageview.CircleImageView
+    android:id="@+id/profile_photo"
+    android:layout_width="56dp"
+    android:layout_height="56dp"
+    android:src="@drawable/aangjnr"
+    android:layout_marginTop="24dp"
+    app:civ_border_width="2dp"
+
+    app:civ_border_color="@color/white"
+    />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:orientation="vertical"
+    android:layout_marginTop="16dp"
+    android:layout_below="@id/profile_photo">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User name"
+        android:id="@+id/header_user_name"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-medium"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_user_name"
+        android:id="@+id/header_user_email"
+        android:text="ordstores@gmail.com"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+</LinearLayout>
+
+
+
+
+</RelativeLayout>

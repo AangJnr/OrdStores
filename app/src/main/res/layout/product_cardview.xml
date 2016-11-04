@@ -1,0 +1,90 @@
+<android.support.v7.widget.CardView android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="2dp"
+    card_view:cardCornerRadius="0dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/product_photo"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:scaleType="centerCrop"
+            android:transitionName="productPhotoExpand"
+
+            />
+
+
+
+        <RelativeLayout
+            android:id="@+id/text_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:layout_marginBottom="4dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/pdtname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+
+
+
+            <TextView
+                android:id="@+id/pdtCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pdtname"
+                android:layout_marginLeft="8dp"
+                android:text="Code"
+                android:textColor="@color/text_white_87"
+                android:textSize="10sp" />
+
+
+            <ImageView
+                android:id="@+id/overflow"
+                android:layout_width="30dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/ic_dots"
+                android:tint="@color/text_white_87"/>
+
+            <TextView
+                android:id="@+id/pdtprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/overflow"
+                android:layout_marginRight="8dp"
+                android:text="Price"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+
+
+
+        </RelativeLayout>
+
+
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <item
+        android:id="@+id/action_add_order"
+        android:orderInCategory="100"
+        android:title="Add to orderlist" />
+
+    <item
+        android:id="@+id/checkout"
+        android:orderInCategory="101"
+        android:title="Checkout" />
+</menu>

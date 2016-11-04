@@ -1,0 +1,66 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="tab_max_width">264dp</dimen>
+    <dimen name="tab_padding_bottom">16dp</dimen>
+    <dimen name="tab_label">14sp</dimen>
+    <dimen name="custom_tab_layout_height">72dp</dimen>
+    <dimen name="tab_height">48dp</dimen>
+    <dimen name="tab_height_large">72dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="edit_text_layout_margin_left">48dp</dimen>
+    <dimen name="login_edittext_fields">320dp</dimen>
+    <dimen name="fab_size">56dp</dimen>
+    <dimen name="button_elevation">2dp</dimen>
+    <dimen name="button_press_elevation">4dp</dimen>
+
+
+    <dimen name="keyline_spacing">16dp</dimen>
+
+    <dimen name="fab_spacing">0dp</dimen>
+    <dimen name="fab_list_spacing">88dp</dimen>
+
+    <dimen name="sheet_width">210dp</dimen>
+    <dimen name="sheet_spacing">10dp</dimen>
+    <dimen name="sheet_item_spacing">@dimen/keyline_spacing</dimen>
+    <dimen name="sheet_item_image_spacing">8dp</dimen>
+    <dimen name="sheet_item_textsize">16sp</dimen>
+
+    <dimen name="snackbar_height">48dp</dimen>
+    <dimen name="snackbar_spacing">24dp</dimen>
+    <dimen name="snackbar_textsize">14sp</dimen>
+
+    <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="fab_elevation">4dp</dimen>
+    <dimen name="fab_sheet_elevation">0dp</dimen>
+
+    <dimen name="drawer_header_height">190dp</dimen>
+    <dimen name="drawer_header_textsize">20sp</dimen>
+    <dimen name="drawer_header_text_spacing">@dimen/keyline_spacing</dimen>
+
+    <dimen name="note_spacing">4dp</dimen>
+    <dimen name="note_content_spacing">16dp</dimen>
+    <dimen name="note_corner_radius">2dp</dimen>
+    <dimen name="note_textsize">14sp</dimen>
+    <dimen name="note_title_textsize">24sp</dimen>
+
+
+    <dimen name="divider">1px</dimen>
+    <dimen name="divider_left_margin">82dp</dimen>
+    <dimen name="divider_right_margin">36dp</dimen>
+    <dimen name="recycler_bottom_space">50dp</dimen>
+
+
+    <dimen name="list_item_elevation">2dp</dimen>
+    <dimen name="list_item_height">64dp</dimen>
+    <dimen name="list_item2_height">96dp</dimen>
+    <dimen name="list_group_item_height">96dp</dimen>
+    <dimen name="list_group_item_with_add_remove_buttons_height">108dp</dimen>
+
+    <dimen name="btn_fab_size">56dp</dimen>
+</resources>
