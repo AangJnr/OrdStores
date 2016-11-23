@@ -86,7 +86,7 @@
             android:layout_marginBottom="8dp"
             android:backgroundTint="@color/colorAccent"
             android:textColorHint="@color/white"
-            android:theme="@style/BubbleTheme">
+            >
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/email"
@@ -96,7 +96,7 @@
                 android:drawableTint="@color/white"
                 android:drawableRight="@drawable/ic_mail_black_24dp"
                 android:inputType="textEmailAddress"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:textColorHighlight="@color/colorPrimary"
                 android:textSize="16sp" />
         </android.support.design.widget.TextInputLayout>
@@ -112,7 +112,7 @@
             android:visibility="gone"
             android:backgroundTint="@color/colorAccent"
             android:textColorHint="@color/white"
-            android:theme="@style/BubbleTheme">
+           >
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/username"
@@ -122,7 +122,7 @@
                 android:drawableTint="@color/white"
                 android:drawableRight="@drawable/ic_contacts_black_24dp"
                 android:inputType="textPersonName"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:textColorHighlight="@color/colorPrimary"
                 android:textSize="16sp" />
         </android.support.design.widget.TextInputLayout>
@@ -138,7 +138,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorAccent"
             android:textColorHint="@color/white"
-            android:theme="@style/BubbleTheme">
+            >
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/password"
@@ -148,7 +148,7 @@
                 android:drawableTint="@color/white"
                 android:drawableRight="@drawable/ic_verified_user_black_24dp"
                 android:inputType="textPassword"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:textColorHighlight="@color/colorPrimary"
                 android:textSize="16sp" />
         </android.support.design.widget.TextInputLayout>
@@ -202,8 +202,6 @@
             android:layout_width="@dimen/fab_size"
             android:layout_height="@dimen/fab_size"
             android:layout_centerHorizontal="true"
-
-
             android:src="@drawable/icon_arrow_right"/>
 
     </RelativeLayout>

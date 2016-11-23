@@ -30,6 +30,10 @@
     <string name="merchant">Merchant</string>
 
     <string name="open">Open</string>
+    <string name="permissions_title">Grant permissions</string>
+    <string name="permissions_desc">OrdStores requires the following permissions. Give OrdStores access to phone, message, loaction, contacts and screen overlay.</string>
+
+
     <string name="close">Close</string>
 
     <string name="no_connection">Please check your internet connection and swipe down to refresh</string>
