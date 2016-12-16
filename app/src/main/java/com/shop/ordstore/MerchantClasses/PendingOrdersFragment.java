@@ -1,4 +1,4 @@
-package com.shop.ordstore.MerchantClasses;
+package com.shop.ordstore.merchantClasses;
 
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -12,9 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.shop.ordstore.DatabaseHelper;
+import com.shop.ordstore.utilities.DatabaseHelper;
 import com.shop.ordstore.R;
-import com.shop.ordstore.RecyclerItemViewAnimator;
 
 import java.util.ArrayList;
 import java.util.List;

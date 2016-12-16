@@ -1,4 +1,4 @@
-package com.shop.ordstore.UserClasses;
+package com.shop.ordstore.userClasses;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -6,8 +6,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
-import com.shop.ordstore.DatabaseHelper;
-import com.shop.ordstore.MerchantClasses.MerchantMainActivity;
 
 /**
  * Created by AangJnr on 9/22/16.

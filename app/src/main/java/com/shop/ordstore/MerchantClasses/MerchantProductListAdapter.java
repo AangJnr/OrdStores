@@ -1,38 +1,25 @@
-package com.shop.ordstore.MerchantClasses;
+package com.shop.ordstore.merchantClasses;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.graphics.Palette;
-import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.shop.ordstore.DatabaseHelper;
-import com.shop.ordstore.DateUtil;
 import com.shop.ordstore.R;
-import com.shop.ordstore.StoreProductList.Product;
-import com.shop.ordstore.UserClasses.OrderTile;
-import com.shop.ordstore.UserClasses.OrdersFragment;
-import com.shop.ordstore.Utils;
+import com.shop.ordstore.storeProductList.Product;
+import com.shop.ordstore.utilities.Utils;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 

@@ -1,4 +1,4 @@
-package com.shop.ordstore.SharedPreferences;
+package com.shop.ordstore.sharedPreferences;
 
 /**
  * Created by AangJnr on 7/30/16.
@@ -9,7 +9,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import com.google.gson.Gson;
-import com.shop.ordstore.UserClasses.OrderTile;
+import com.shop.ordstore.userClasses.OrderTile;
 
 import java.util.ArrayList;
 import java.util.Arrays;

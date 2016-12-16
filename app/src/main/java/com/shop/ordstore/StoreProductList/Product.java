@@ -1,4 +1,4 @@
-package com.shop.ordstore.StoreProductList;
+package com.shop.ordstore.storeProductList;
 
 /**
  * Created by AangJnr on 8/10/16.

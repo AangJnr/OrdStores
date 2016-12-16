@@ -1,4 +1,4 @@
-package com.shop.ordstore.MerchantClasses;
+package com.shop.ordstore.merchantClasses;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,12 +9,10 @@ import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v7.app.NotificationCompat;
-import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.shop.ordstore.R;
-import com.shop.ordstore.UserClasses.MainActivity;
 
 import java.util.Random;
 

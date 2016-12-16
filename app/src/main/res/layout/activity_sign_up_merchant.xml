@@ -164,6 +164,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/white"
+                        app:passwordToggleDrawable="@color/white"
                         app:errorTextAppearance="@style/ErrorText"
                         >
 
@@ -174,7 +175,7 @@
                             android:layout_height="wrap_content"
                             android:hint="Password"
                             android:inputType="textPassword"
-                            android:singleLine="true"
+                            android:maxLines="1"
                             android:textColor="@color/white"
                             android:fontFamily="sans-serif-light"
                             android:textSize="16sp"
@@ -207,6 +208,7 @@
                 android:id="@+id/merchant_login_fab"
                 android:layout_width="@dimen/fab_size"
                 android:layout_height="@dimen/fab_size"
+                app:fabSize="normal"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/icon_arrow_right"/>
 

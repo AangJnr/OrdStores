@@ -1,4 +1,4 @@
-package com.shop.ordstore.UserClasses;
+package com.shop.ordstore.userClasses;
 
 /**
  * Created by AangJnr on 6/27/16.
@@ -33,12 +33,12 @@ import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ObjectAnimator;
-import com.shop.ordstore.DatabaseHelper;
-import com.shop.ordstore.DateUtil;
-import com.shop.ordstore.ExpandableItemLayout;
+import com.shop.ordstore.utilities.DatabaseHelper;
+import com.shop.ordstore.utilities.DateUtil;
+import com.shop.ordstore.utilities.ExpandableItemLayout;
 import com.shop.ordstore.R;
-import com.shop.ordstore.SharedPreferences.SharedPreference;
-import com.shop.ordstore.Utils;
+import com.shop.ordstore.sharedPreferences.SharedPreference;
+import com.shop.ordstore.utilities.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;

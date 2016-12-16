@@ -50,9 +50,9 @@
     <dimen name="note_title_textsize">24sp</dimen>
 
 
-    <dimen name="divider">1px</dimen>
-    <dimen name="divider_left_margin">82dp</dimen>
-    <dimen name="divider_right_margin">36dp</dimen>
+    <dimen name="divider">3px</dimen>
+    <dimen name="divider_left_margin">140dp</dimen>
+    <dimen name="divider_right_margin">0dp</dimen>
     <dimen name="recycler_bottom_space">50dp</dimen>
 
 

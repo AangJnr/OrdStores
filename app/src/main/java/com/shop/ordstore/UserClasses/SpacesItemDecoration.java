@@ -1,4 +1,4 @@
-package com.shop.ordstore.UserClasses;
+package com.shop.ordstore.userClasses;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

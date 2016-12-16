@@ -1,4 +1,4 @@
-package com.shop.ordstore.UserClasses;
+package com.shop.ordstore.userClasses;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -21,9 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.shop.ordstore.DatabaseHelper;
-import com.shop.ordstore.MerchantClasses.MerchantMainActivity;
-import com.shop.ordstore.MerchantClasses.PendingOrder;
+import com.shop.ordstore.utilities.DatabaseHelper;
 import com.shop.ordstore.R;
 
 import java.util.Random;

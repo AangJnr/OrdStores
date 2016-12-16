@@ -1,6 +1,5 @@
-package com.shop.ordstore.MerchantClasses;
+package com.shop.ordstore.merchantClasses;
 
-import android.app.Application;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -18,16 +17,14 @@ import android.util.Log;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.shop.ordstore.DatabaseHelper;
-import com.shop.ordstore.DateUtil;
+import com.shop.ordstore.utilities.DatabaseHelper;
+import com.shop.ordstore.utilities.DateUtil;
 import com.shop.ordstore.R;
-import com.shop.ordstore.UserClasses.MainActivity;
 
 import java.util.Random;
 

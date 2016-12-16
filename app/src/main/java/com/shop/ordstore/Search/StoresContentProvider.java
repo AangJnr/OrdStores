@@ -1,36 +1,24 @@
-package com.shop.ordstore.Search;
+package com.shop.ordstore.search;
 
 import android.app.SearchManager;
 import android.content.ContentProvider;
 import android.content.ContentValues;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.shop.ordstore.R;
-import com.shop.ordstore.UserClasses.StoreTile;
+import com.shop.ordstore.userClasses.StoreTile;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+
 
 
 /**

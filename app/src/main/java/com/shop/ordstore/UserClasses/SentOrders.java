@@ -1,6 +1,4 @@
-package com.shop.ordstore.UserClasses;
-
-import com.google.firebase.database.Exclude;
+package com.shop.ordstore.userClasses;
 
 /**
  * Created by AangJnr on 9/21/16.

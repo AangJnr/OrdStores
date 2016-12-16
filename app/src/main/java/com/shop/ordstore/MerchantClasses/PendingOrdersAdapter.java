@@ -1,4 +1,4 @@
-package com.shop.ordstore.MerchantClasses;
+package com.shop.ordstore.merchantClasses;
 
 /**
  * Created by AangJnr on 9/21/16.
@@ -13,31 +13,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.nineoldandroids.animation.AnimatorSet;
-import com.shop.ordstore.DatabaseHelper;
-import com.shop.ordstore.DateUtil;
-import com.shop.ordstore.ExpandableItemLayout;
+import com.shop.ordstore.utilities.DatabaseHelper;
+import com.shop.ordstore.utilities.DateUtil;
+import com.shop.ordstore.utilities.ExpandableItemLayout;
 import com.shop.ordstore.R;
-import com.shop.ordstore.SharedPreferences.SharedPreference;
-import com.shop.ordstore.UserClasses.UserOrderStatus;
+import com.shop.ordstore.sharedPreferences.SharedPreference;
+import com.shop.ordstore.userClasses.UserOrderStatus;
 import com.squareup.picasso.Picasso;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 /**

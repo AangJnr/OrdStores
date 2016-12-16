@@ -61,6 +61,8 @@
     <TextView
         android:id="@+id/follow"
         android:text="follow"
+        android:padding="8dp"
+        android:background="?android:selectableItemBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAllCaps="true"

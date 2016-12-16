@@ -1,4 +1,4 @@
-package com.shop.ordstore.StoresListClasses;
+package com.shop.ordstore.storesListClasses;
 
 import android.app.SearchManager;
 import android.content.ComponentName;
@@ -13,7 +13,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,13 +24,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.shop.ordstore.DatabaseHelper;
+import com.shop.ordstore.utilities.DatabaseHelper;
 import com.shop.ordstore.R;
-import com.shop.ordstore.UserClasses.SpacesItemDecoration;
-import com.shop.ordstore.UserClasses.StoreTile;
-import com.shop.ordstore.UserClasses.StoresFragment;
+import com.shop.ordstore.userClasses.SpacesItemDecoration;
+import com.shop.ordstore.userClasses.StoreTile;
+import com.shop.ordstore.userClasses.StoresFragment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +60,7 @@ public class StoresListActivity extends AppCompatActivity implements SearchView.
 
         merchantsDatabaseRef = FirebaseDatabase.getInstance().getReference().child("merchants");
 
-        setContentView(R.layout.stores_listview);
+        setContentView(R.layout.activity_stores_list);
 
 
         emptyView_nosignal_layout = (RelativeLayout) findViewById(R.id.empty_view_placeHolder_nosignal);
@@ -139,23 +136,27 @@ public class StoresListActivity extends AppCompatActivity implements SearchView.
 
 //                    Show dialog here//
 
-                final AlertDialog.Builder logout_alert_builder = new AlertDialog.Builder(StoresListActivity.this)
-                        .setTitle("No connection!")
-                        .setMessage("Oops! something went wrong. Try again later")
-                        .setCancelable(false)
-                        .setIcon(R.drawable.attention_96)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                                dialog.dismiss();
-                                emptyView_nosignal_layout.setVisibility(View.VISIBLE);
-                                finish();
+                if (getApplicationContext() != null) {
 
-                            }
-                        });
-                AlertDialog logout_dialog = logout_alert_builder.create();
-                logout_dialog.show();
+
+                    final AlertDialog.Builder logout_alert_builder = new AlertDialog.Builder(StoresListActivity.this)
+                            .setTitle("No connection!")
+                            .setMessage("Oops! something went wrong. Try again later")
+                            .setCancelable(false)
+                            .setIcon(R.drawable.attention_96)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                    dialog.dismiss();
+                                    emptyView_nosignal_layout.setVisibility(View.VISIBLE);
+                                    finish();
+
+                                }
+                            });
+                    AlertDialog logout_dialog = logout_alert_builder.create();
+                    logout_dialog.show();
+                }
 
            }
 

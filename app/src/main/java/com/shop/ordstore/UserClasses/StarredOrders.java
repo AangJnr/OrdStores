@@ -1,22 +1,26 @@
-package com.shop.ordstore.UserClasses;
+package com.shop.ordstore.userClasses;
 
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shop.ordstore.R;
-import com.shop.ordstore.SharedPreferences.SharedPreference;
-import com.shop.ordstore.DatabaseHelper;
+import com.shop.ordstore.sharedPreferences.SharedPreference;
+import com.shop.ordstore.utilities.DatabaseHelper;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.List;
 
@@ -41,9 +45,17 @@ public class StarredOrders extends AppCompatActivity {
         setContentView(R.layout.starred_orders_layout);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Starred Orders");
-        toolbar.setFitsSystemWindows(true);
         setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setElevation(7);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        // Get access to the custom title view
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+
+
 
         emptyView = (RelativeLayout) findViewById(R.id.empty_view_placeHolder);
 
@@ -55,8 +67,8 @@ public class StarredOrders extends AppCompatActivity {
 
         recycler.setLayoutManager(layoutManager);
         recycler.setHasFixedSize(true);
-        RecyclerSpacesItemDecoration decoration = new RecyclerSpacesItemDecoration(32);
-        recycler.addItemDecoration(decoration);
+        /*RecyclerSpacesItemDecoration decoration = new RecyclerSpacesItemDecoration(32);
+        recycler.addItemDecoration(decoration);*/
         ordersDataBaseHelper = new DatabaseHelper(this);
 
         orderTile = ordersDataBaseHelper.getAllStarredOrders();
@@ -79,6 +91,14 @@ public class StarredOrders extends AppCompatActivity {
 
                 mAdapter = new OrdersCardAdapter(this, orderTile);
                 recycler.setAdapter(mAdapter);
+
+                /*recycler.addItemDecoration(
+                        new HorizontalDividerItemDecoration.Builder(StarredOrders.this)
+                                .color(ContextCompat.getColor(StarredOrders.this, R.color.divider))
+                                .sizeResId(R.dimen.divider)
+                                .marginResId(R.dimen.divider_left_margin, R.dimen.divider_right_margin)
+                                .build());
+*/
                 initSwipe();
 
 
@@ -201,6 +221,21 @@ public class StarredOrders extends AppCompatActivity {
 
         }
 
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // todo: goto back activity from here
+                //super.onBackPressed();
+                supportFinishAfterTransition();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

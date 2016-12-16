@@ -1,4 +1,4 @@
-package com.shop.ordstore.UserClasses;
+package com.shop.ordstore.userClasses;
 
 /**
  * Created by AangJnr on 9/11/16.

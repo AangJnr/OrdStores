@@ -1,37 +1,31 @@
-package com.shop.ordstore.StoreProductList;
+package com.shop.ordstore.storeProductList;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.graphics.Palette;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.shop.ordstore.DatabaseHelper;
-import com.shop.ordstore.DateUtil;
+import com.shop.ordstore.utilities.DatabaseHelper;
+import com.shop.ordstore.utilities.DateUtil;
 import com.shop.ordstore.R;
-import com.shop.ordstore.UserClasses.OrderTile;
-import com.shop.ordstore.UserClasses.OrdersFragment;
-import com.shop.ordstore.Utils;
+import com.shop.ordstore.userClasses.OrderTile;
+import com.shop.ordstore.userClasses.OrdersFragment;
+import com.shop.ordstore.utilities.Utils;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -139,6 +133,7 @@ public class StoreProductsListAdapter extends RecyclerView.Adapter<StoreProducts
                                 viewHolder.text_holder.setBackgroundColor(mutedLight);
                             }
                         });
+
                     }
                 }
 
@@ -264,27 +259,35 @@ public class StoreProductsListAdapter extends RecyclerView.Adapter<StoreProducts
         final Product product = products.get(menuPosition);
 
 
-        final AlertDialog.Builder alert = new AlertDialog.Builder(context);
-        final EditText edittext = new EditText(context);
-        edittext.setInputType(InputType.TYPE_CLASS_NUMBER);
-        alert.setMessage("Enter quantity");
-        alert.setView(edittext);
 
-        alert.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                //What ever you want to do with the value
+        LayoutInflater layoutInflaterAndroid = LayoutInflater.from(context);
+        View mView = layoutInflaterAndroid.inflate(R.layout.custom_dialog, null);
+        android.app.AlertDialog.Builder alertDialogBuilderUserInput = new android.app.AlertDialog.Builder(context);
+        alertDialogBuilderUserInput.setView(mView);
+
+        final EditText edittext = (EditText) mView.findViewById(R.id.userInputDialog);
+
+        alertDialogBuilderUserInput
+                .setCancelable(true);
+        final android.app.AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
+        alertDialogAndroid.show();
+
+        mView.findViewById(R.id.positive_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 String _quantity = edittext.getText().toString();
 
                 try {
-                    Integer.parseInt(_quantity);
+                    int quantity = Integer.parseInt(_quantity);
 
-                    if(_quantity != "0") {
-                        addOrder(product.getProductName(), product.getItemCode(), _quantity, product.getPrice(), "", "",
+                    if(quantity != 0 && quantity < 100) {
+                        addOrder(product.getProductName(), product.getItemCode(), String.valueOf(quantity), product.getPrice(), "", "",
                                 "", product.getPhotoId(), StoreProductListActivity.merchantID(), DateUtil.getDateInMillisToString());
+                        alertDialogAndroid.dismiss();
 
                         OrdersFragment.adapter.notifyDataSetChanged();
                     }else{
-                        Toast.makeText(context, "Quantity cannot be 0.",
+                        Toast.makeText(context, "Quantity cannot be 0",
                                 Toast.LENGTH_SHORT).show();
 
                     }
@@ -296,21 +299,16 @@ public class StoreProductsListAdapter extends RecyclerView.Adapter<StoreProducts
 
 
 
-
-
-
-
             }
         });
 
-        alert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // what ever you want to do with No option.
-                dialog.dismiss();
+
+        mView.findViewById(R.id.negative_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialogAndroid.dismiss();
             }
         });
-
-        alert.show();
 
     }
 

@@ -1,4 +1,4 @@
-package com.shop.ordstore.StoreProductList;
+package com.shop.ordstore.storeProductList;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -31,8 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.shop.ordstore.R;
-import com.shop.ordstore.UserClasses.SpacesItemDecoration;
-import com.shop.ordstore.Utils;
+import com.shop.ordstore.utilities.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -166,7 +165,7 @@ public class StoreProductListActivity extends AppCompatActivity  {
                 //Progress dismiss
 
 
-                final AlertDialog.Builder logout_alert_builder = new AlertDialog.Builder(StoreProductListActivity.this)
+                final AlertDialog.Builder logout_alert_builder = new AlertDialog.Builder(StoreProductListActivity.this, R.style.DialogTheme)
                         .setTitle("No connection!")
                         .setMessage("Oops! something went wrong. Try again later")
                         .setCancelable(false)
@@ -272,7 +271,8 @@ public class StoreProductListActivity extends AppCompatActivity  {
             Product _product = productList.get(position);
             Intent intent = new Intent(StoreProductListActivity.this, ExpandedView.class);
 
-
+            intent.putExtra("product_name", _product.getProductName());
+            intent.putExtra("product_price", _product.getPrice());
             intent.putExtra("product_code", _product.getItemCode());
             intent.putExtra("product_photo", _product.getPhotoId());
             intent.putExtra("product_details", _product.getDetails());

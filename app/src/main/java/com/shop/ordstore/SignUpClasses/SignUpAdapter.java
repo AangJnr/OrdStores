@@ -1,4 +1,4 @@
-package com.shop.ordstore.SignUpClasses;
+package com.shop.ordstore.signUpClasses;
 
 import android.content.Context;
 import android.support.design.widget.FloatingActionButton;

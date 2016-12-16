@@ -1,4 +1,4 @@
-package com.shop.ordstore.MerchantClasses;
+package com.shop.ordstore.merchantClasses;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,11 +18,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.shop.ordstore.DepthPageTransformer;
-import com.shop.ordstore.UserClasses.OrdServiceRevised;
+import com.shop.ordstore.utilities.DepthPageTransformer;
+import com.shop.ordstore.userClasses.OrdServiceRevised;
 import com.shop.ordstore.R;
-import com.shop.ordstore.SignUpClasses.SignUpActivity;
-import com.shop.ordstore.DatabaseHelper;
+import com.shop.ordstore.signUpClasses.SignUpActivity;
+import com.shop.ordstore.utilities.DatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;

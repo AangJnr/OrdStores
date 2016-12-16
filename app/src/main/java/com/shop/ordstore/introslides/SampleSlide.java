@@ -5,42 +5,75 @@ package com.shop.ordstore.introslides;
  */
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-public class SampleSlide extends Fragment {
+import com.heinrichreimersoftware.materialintro.app.SlideFragment;
+import com.shop.ordstore.R;
 
-    private static final String ARG_LAYOUT_RES_ID = "layoutResId";
-    private int layoutResId;
+public class SampleSlide extends SlideFragment {
+
+    private EditText fakeUsername;
+
+    private EditText fakePassword;
+
+    private Button fakeLogin;
+
+    private boolean loggedIn = false;
+
+    private Handler loginHandler = new Handler();
+
 
     public SampleSlide() {
+        // Required empty public constructor
     }
 
-    public static SampleSlide newInstance(int layoutResId) {
-        SampleSlide sampleSlide = new SampleSlide();
-
-        Bundle args = new Bundle();
-        args.putInt(ARG_LAYOUT_RES_ID, layoutResId);
-        sampleSlide.setArguments(args);
-
-        return sampleSlide;
+    public static SampleSlide newInstance() {
+        return new SampleSlide();
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View root = inflater.inflate(R.layout.permissions_fragment_layout, container, false);
 
-        if (getArguments() != null && getArguments().containsKey(ARG_LAYOUT_RES_ID))
-            layoutResId = getArguments().getInt(ARG_LAYOUT_RES_ID);
+       /* fakeUsername = (EditText) root.findViewById(R.id.fakeUsername);
+        fakePassword = (EditText) root.findViewById(R.id.fakePassword);
+        fakeLogin = (Button) root.findViewById(R.id.fakeLogin);
+
+        fakeUsername.setEnabled(!loggedIn);
+        fakePassword.setEnabled(!loggedIn);
+        fakeLogin.setEnabled(!loggedIn);
+
+        fakeLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fakeUsername.setEnabled(false);
+                fakePassword.setEnabled(false);
+                fakeLogin.setEnabled(false);
+                fakeLogin.setText(R.string.label_fake_login_loading);
+
+                loginHandler.postDelayed(loginRunnable, 2000);
+            }
+        });*/
+
+        return root;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(layoutResId, container, false);
+    public void onDestroy() {
+
+        super.onDestroy();
     }
 
+    @Override
+    public boolean canGoForward() {
+        return loggedIn;
+    }
 }

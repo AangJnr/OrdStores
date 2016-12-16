@@ -1,4 +1,4 @@
-package com.shop.ordstore.MerchantClasses;
+package com.shop.ordstore.merchantClasses;
 
 /**
  * Created by AangJnr on 9/21/16.

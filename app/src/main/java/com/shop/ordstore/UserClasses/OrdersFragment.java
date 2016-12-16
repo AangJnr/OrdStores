@@ -1,4 +1,4 @@
-package com.shop.ordstore.UserClasses;
+package com.shop.ordstore.userClasses;
 
 /**
  * Created by AangJnr on 4/7/16.
@@ -20,9 +20,9 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
 
-import com.shop.ordstore.RecyclerItemViewAnimator;
+import com.shop.ordstore.utilities.RecyclerItemViewAnimator;
 import com.shop.ordstore.R;
-import com.shop.ordstore.DatabaseHelper;
+import com.shop.ordstore.utilities.DatabaseHelper;
 
 import java.util.List;
 
@@ -114,7 +114,15 @@ public class OrdersFragment extends Fragment {
 
 
         RecyclerSpacesItemDecoration decoration = new RecyclerSpacesItemDecoration(32);
-        recycler.addItemDecoration(decoration);
+        //recycler.addItemDecoration(decoration);
+
+
+        /*recycler.addItemDecoration(
+                new HorizontalDividerItemDecoration.Builder(getActivity())
+                        .color(ContextCompat.getColor(getActivity(), R.color.divider))
+                        .sizeResId(R.dimen.divider)
+                        .marginResId(R.dimen.divider_left_margin, R.dimen.divider_right_margin)
+                        .build());*/
 
         initSwipe();
 
@@ -127,20 +135,15 @@ public class OrdersFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /*recycler.addItemDecoration(
-                new HorizontalDividerItemDecoration.Builder(getActivity())
-                        .color(getResources().getColor(R.color.divider))
-                        .sizeResId(R.dimen.divider)
-                        .build());*/
+
 
 
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {// Always call the superclass so it can save the view hierarchy state
+        super.onActivityCreated(savedInstanceState);
 
-        // Always call the superclass so it can save the view hierarchy state
-        super.onCreate(savedInstanceState);
 
 
     }

@@ -1,50 +1,209 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2196F3"
-    android:layout_weight="10"
-    android:id="@+id/main">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:paddingLeft="32dp"
-        android:layout_weight="2"
-        android:fontFamily="sans-serif-thin"
-        android:textColor="#ffffff"
-        android:paddingRight="32dp"
-        android:textSize="28sp"
-        android:text="Slide 2 title"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="#ffffff"
-        android:paddingLeft="64dp"
-        android:paddingRight="64dp"
-        android:textSize="16sp"
-        android:text="Loooooooooooooooo[...]ooooooooong descreption here"/>
+    android:fitsSystemWindows="true">
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_weight="5">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:background="@drawable/login_gradient_background">
+
+        <RelativeLayout
+            android:id="@+id/logo_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="24dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="95dp"
+                android:layout_marginBottom="8dp"
+                android:layout_centerHorizontal="true">
+
+
+                <ImageView
+                    android:id="@+id/basket"
+                    android:layout_width="95dp"
+                    android:layout_height="95dp"
+                    android:padding="8dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/white_basket"
+
+                    />
+
+                <ImageView
+                    android:id="@+id/ord"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignRight="@id/basket"
+                    android:layout_marginRight="4dp"
+                    android:src="@drawable/icon_ord"
+
+                    />
+            </RelativeLayout>
+
+
+
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginTop="16dp"
+            >
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/user_cred_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorTextAppearance="@style/ErrorText"
+                >
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/user_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Email"
+                    android:maxLines="1"
+                    android:drawableRight="@drawable/email"
+                    android:inputType="textEmailAddress"
+                    android:drawableTint="@color/text_color"
+                    android:textSize="13sp"
+                    android:theme="@style/MyEditText"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/user_username_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorTextAppearance="@style/ErrorText"
+                >
+
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Username"
+                    android:maxLines="1"
+                    android:drawableRight="@drawable/gender_neutral_user"
+                    android:inputType="textPersonName"
+                    android:drawableTint="@color/colorPrimary"
+                    android:textSize="13sp"
+                    android:theme="@style/MyEditText"
+                    />
+
+
+            </android.support.design.widget.TextInputLayout>
+
+
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/user_password_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleTint="@color/divider"
+                app:errorTextAppearance="@style/MyEditText"
+                >
+
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Password"
+                    android:maxLines="1"
+                    android:inputType="textPassword"
+                    android:fontFamily="sans-serif-light"
+                    android:textSize="13sp"
+                    android:theme="@style/MyEditText"
+                    />
+
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/user_phone_no_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorTextAppearance="@style/ErrorText"
+                >
+
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Phone number"
+                    android:maxLines="1"
+                    android:drawableRight="@drawable/phone"
+                    android:inputType="phone"
+                    android:textSize="13sp"
+                    android:theme="@style/MyEditText"
+                    />
+
+
+            </android.support.design.widget.TextInputLayout>
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_layout"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        >
+
+        <TextView
+            android:id="@+id/bottom_text_querry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_marginLeft="24dp"
+            android:text="Don't have an account?"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/bottom_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
             android:padding="16dp"
-            android:src="@drawable/icon_ord"/>
-    </LinearLayout>
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="64dp" />
-</LinearLayout>
+            android:text="SIGN UP"
+            android:textColor="@color/colorPrimary"
+            android:textSize="13sp" />
+    </android.support.v7.widget.LinearLayoutCompat>
+
+</RelativeLayout>

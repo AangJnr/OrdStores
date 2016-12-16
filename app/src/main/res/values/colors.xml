@@ -2,11 +2,13 @@
 <resources>
 
     <color name="colorPrimary">#1b8f63</color>
-    <color name="colorPrimaryDark">#1a6e4e</color>
+    <color name="colorPrimaryDark">#1b7653</color>
 
 
-  <!--  <color name="colorPrimary">#4CAF50</color>
-    <color name="colorPrimaryDark">#388E3C</color>-->
+
+   <!--<color name="colorPrimary">#0eb065</color>
+    <color name="colorPrimaryDark">#0b9957</color>-->
+
     <color name="colorAccent">#fff2c83f</color>
     <color name="white">#FFFFFFFF</color>
     <color name="tab_text_selected">@color/colorAccent</color>
@@ -22,7 +24,7 @@
     <color name="edittext_error_color">#cf4149</color>
     <color name="yellow_bar_disabled">#9f9f9f</color>
     <color name="material_icon_colors">#9E9E9E</color>
-    <color name="divider">#ffc2c2c2</color>
+    <color name="divider">#dad9d9d9</color>
 
     <color name="background_card">#fff</color>
     <color name="background_snackbar">#323232</color>
@@ -38,5 +40,11 @@
 
     <color name="customButtonPressed">#5acacaca</color>
     <color name="customButtonFocused">#3ea1a1a1</color>
+
+
+    <color name="actionbar_opacity">#00000000</color>
+
+    <color name="color_slide_intro">#fdfdfd</color>
+    <color name="color_dark_slide_intro">#ebeef0</color>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.shop.ordstore.UserClasses;
+package com.shop.ordstore.userClasses;
 
 /**
  * Created by AangJnr on 9/12/16.
@@ -35,10 +35,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.shop.ordstore.DatabaseHelper;
-import com.shop.ordstore.DateUtil;
+import com.shop.ordstore.utilities.DatabaseHelper;
+import com.shop.ordstore.utilities.DateUtil;
 import com.shop.ordstore.R;
 import com.skyfishjy.library.RippleBackground;
 

@@ -1,4 +1,4 @@
-package com.shop.ordstore.UserClasses;
+package com.shop.ordstore.userClasses;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.shop.ordstore.R;
-import com.shop.ordstore.DatabaseHelper;
+import com.shop.ordstore.utilities.DatabaseHelper;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 

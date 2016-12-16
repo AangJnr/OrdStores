@@ -1,4 +1,4 @@
-package com.shop.ordstore.SignUpClasses;
+package com.shop.ordstore.signUpClasses;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,11 +10,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.method.PasswordTransformationMethod;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,15 +30,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.shop.ordstore.MerchantClasses.Merchant;
-import com.shop.ordstore.MerchantClasses.MerchantMainActivity;
+import com.shop.ordstore.merchantClasses.Merchant;
+import com.shop.ordstore.merchantClasses.MerchantMainActivity;
 import com.shop.ordstore.R;
 
 
 /**
  * Created by AangJnr on 9/2/16.
  */
-public class MerchantSignUpFragment extends Fragment {
+public class MerchantSignUpFragment extends Fragment implements TextView.OnEditorActionListener {
     View rootView;
     EditText _emailText, _passwordText;
     FloatingActionButton login_fab;
@@ -85,6 +88,8 @@ public class MerchantSignUpFragment extends Fragment {
         _passwordText = (EditText) rootView.findViewById(R.id.password);
 
 
+
+
         login_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,6 +103,10 @@ public class MerchantSignUpFragment extends Fragment {
 
             }
         });
+
+
+
+
 
 
         return rootView;
@@ -114,12 +123,12 @@ public class MerchantSignUpFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         // Always call the superclass so it can save the view hierarchy state
-        super.onCreate(savedInstanceState);
+        super.onActivityCreated(savedInstanceState);
 
 
 
         visibility2 = (ImageView) getActivity().findViewById(R.id.password_visibility_toggle);
-        visibility2.setOnClickListener(new View.OnClickListener() {
+        /*visibility2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -144,8 +153,10 @@ public class MerchantSignUpFragment extends Fragment {
 
 
             }
-        });
+        });*/
 
+        _emailText.setOnEditorActionListener(this);
+        _passwordText.setOnEditorActionListener(this);
 
     }
 
@@ -293,5 +304,20 @@ public class MerchantSignUpFragment extends Fragment {
         Toast.makeText(getActivity(), "Login failed. Please contact the OrdStores Team", Toast.LENGTH_LONG).show();
 
         login_fab.setEnabled(true);
+    }
+
+    @Override
+    public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+
+            email = _emailText.getText().toString();
+            password = _passwordText.getText().toString();
+
+
+            signIn();
+
+            return true;
     }
 }

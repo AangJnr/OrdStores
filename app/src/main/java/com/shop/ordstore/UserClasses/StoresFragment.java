@@ -1,4 +1,4 @@
-package com.shop.ordstore.UserClasses;
+package com.shop.ordstore.userClasses;
 
 /**
  * Created by AangJnr on 4/7/16.
@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.util.Pair;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,11 +20,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.shop.ordstore.R;
-import com.shop.ordstore.StoreProductList.StoreProductListActivity;
-import com.shop.ordstore.DatabaseHelper;
+import com.shop.ordstore.storeProductList.StoreProductListActivity;
+import com.shop.ordstore.utilities.DatabaseHelper;
 
 import java.util.List;
 
@@ -155,7 +153,7 @@ public class StoresFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         // Always call the superclass so it can save the view hierarchy state
-        super.onCreate(savedInstanceState);
+        super.onActivityCreated(savedInstanceState);
 
         /*float offsetPx = getResources().getDimension(R.dimen.recycler_bottom_space);
         BottomOffsetDecoration bottomOffsetDecoration = new BottomOffsetDecoration((int) offsetPx);

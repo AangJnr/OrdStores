@@ -1,4 +1,4 @@
-package com.shop.ordstore.SignUpClasses;
+package com.shop.ordstore.signUpClasses;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -10,9 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
+import com.shop.ordstore.utilities.DepthPageTransformer;
 import com.shop.ordstore.R;
-import com.shop.ordstore.UserClasses.OrdServiceRevised;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,7 @@ import java.util.List;
 public class SignUpActivity extends AppCompatActivity {
 
     static Boolean isSignUpPage;
+    LinearLayout dotsLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +38,15 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.signup_viewpager);
+        viewPager.setPageTransformer(true, new DepthPageTransformer());
+
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new UserSignUpFragment());
         adapter.addFrag(new MerchantSignUpFragment());
         viewPager.setAdapter(adapter);
+
+        final ImageView dot_1 =(ImageView) findViewById(R.id.dot_1);
+        final ImageView dot_2 =(ImageView) findViewById(R.id.dot_2);
 
 
 
@@ -54,9 +62,14 @@ public class SignUpActivity extends AppCompatActivity {
                 if(position == 0){
 
                     isSignUpPage = true;
+                    dot_1.setBackgroundResource(R.drawable.page_selected);
+                    dot_2.setBackgroundResource(R.drawable.page_not_selected);
+
                 }else{
 
                     isSignUpPage = false;
+                    dot_2.setBackgroundResource(R.drawable.page_selected);
+                    dot_1.setBackgroundResource(R.drawable.page_not_selected);
                 }
 
             }
@@ -122,7 +135,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         return yes;
     }
-
 
 
 

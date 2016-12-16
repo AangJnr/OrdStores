@@ -3,15 +3,13 @@
     <!-- Base application theme. -->
 
 
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-
-
-
     </style>
 
     <style name="AppThemeSplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
@@ -43,38 +41,34 @@
 
     <style name="LoginTheme" parent="AppTheme">
         <!-- Customize your theme here. -->
-
-
     </style>
 
 
 
 
 
-    <style name="Theme.AppCompat.Translucent">
+    <style name="Theme.Translucent" parent="AppTheme">
         <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@android:style/Animation</item>
-
-
+        <item name="android:textColorPrimary">@color/text_black_87</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
 
 
-    <style name="MyDialogTheme" parent="AppTheme">
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
 
-        <!-- Fill the screen -->
-        <!-- No backgrounds, titles or window float -->
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:backgroundDimEnabled">true</item>
-        <!-- Just to prove it's working -->
+        <item name="android:textColorPrimary">@color/text_black_87</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:background">@color/white</item>
+
+
     </style>
 
 
@@ -97,10 +91,24 @@
 
 
     <style name="ErrorText" parent="TextAppearance.AppCompat.Small">
-        <item name="android:textStyle">bold|italic</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/edittext_error_color</item>
     </style>
 
+    <style name="MyEditText" parent="Theme.AppCompat.Light">
+        <item name = "android:fontFamily">sans-serif</item>
+        <item name="colorControlNormal">@color/divider</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+        <item name="android:textSize">13sp</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+
+    </style>
+
+    <style name="TextLabel" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">13sp</item>
+    </style>
 
 
     <style name="AppBarToolbar" parent="Theme.AppCompat.NoActionBar">
@@ -119,6 +127,26 @@
 
     <color name="primary">@color/colorPrimary</color>
     <color name="primaryDarker">@color/colorPrimaryDark</color>
+
+
+    <style name="BubbleTheme" parent="TextAppearance.AppCompat">
+
+        <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
+        <item name="colorControlNormal">#dadada</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
+        <item name="android:textColorHighlight">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorHint">#FFDFDFDF</item>
+        <item name="android:textColor">@color/white</item>
+
+    </style>
+
+
+    <style name="TransparentToolbar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
+    </style>
 
 
 

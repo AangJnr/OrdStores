@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.shop.ordstore"
-    xmlns:tools="http://schemas.android.com/tools">
+   >
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
@@ -14,7 +14,7 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <uses-sdk tools:overrideLibrary="com.amqtech.permissions.helper"/>
+
 
 
 
@@ -27,13 +27,13 @@
         android:theme="@style/AppTheme">
 
         <provider
-            android:name=".Search.StoresContentProvider"
-            android:authorities="com.shop.ordstore.Search.StoresContentProvider"
+            android:name=".search.StoresContentProvider"
+            android:authorities="com.shop.ordstore.search.StoresContentProvider"
             android:enabled="true"
             android:exported="true"/>
 
         <activity
-            android:name=".SplashActivity"
+            android:name=".utilities.SplashActivity"
             android:theme="@style/AppThemeSplashScreen">
 
             <intent-filter>
@@ -45,7 +45,7 @@
         </activity>
 
         <activity
-            android:name=".SignUpClasses.SignUpActivity"
+            android:name=".signUpClasses.SignUpActivity"
             android:theme="@style/LoginTheme"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -55,20 +55,25 @@
         </activity>
 
         <activity
-            android:name=".UserClasses.MainActivity"
+            android:name=".userClasses.MainActivity"
             android:label=""
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             android:theme="@style/AppTheme">
         </activity>
 
         <activity
-            android:name=".UserClasses.StarredOrders"
+            android:name=".userClasses.StarredOrders"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
+            android:name=".userClasses.Payments"
             android:theme="@style/AppTheme">
         </activity>
 
 
         <activity
-            android:name=".StoresListClasses.StoresListActivity"
+            android:name=".storesListClasses.StoresListActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme">
 
@@ -88,68 +93,76 @@
 
 
         <activity
-            android:name=".MerchantClasses.MerchantMainActivity"
+            android:name=".merchantClasses.MerchantMainActivity"
             android:theme="@style/AppTheme">
         </activity>
 
         <activity
-            android:name=".StoreProductList.StoreProductListActivity"
+            android:name=".storeProductList.StoreProductListActivity"
             android:theme="@style/AppTheme">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".UserClasses.MainActivity" />
+                android:value=".userClasses.MainActivity" />
         </activity>
 
 
         <activity
-            android:name=".StoreProductList.ExpandedView"
-            android:theme="@style/Theme.AppCompat.Translucent">
+            android:name=".storeProductList.ExpandedView"
+            android:theme="@style/Theme.Translucent">
 
         </activity>
 
 
 
-        <service android:name=".UserClasses.OrdServiceRevised"
+
+
+
+        <service android:name=".userClasses.OrdServiceRevised"
                     android:theme="@style/AppTheme"
                     android:windowSoftInputMode="stateVisible"
-                    ></service>
+                    />
 
-        <service android:name=".UserClasses.UserService"
+        <service android:name=".userClasses.UserService"
             android:persistent="true"
 
-            ></service>
+            />
 
 
         <service
 
-            android:name=".UserClasses.UserTokenService">
+            android:name=".userClasses.UserTokenService"
+            android:exported="false"
+            >
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
 
         <service
-            android:name=".UserClasses.UserMessageReceiverService">
+            android:name=".userClasses.UserMessageReceiverService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
 
-        <service android:name=".MerchantClasses.MerchantService"
+        <service android:name=".merchantClasses.MerchantService"
             android:persistent="true"
 
-            ></service>
+            />
 
         <service
-            android:name=".MerchantClasses.MerchantTokenService">
+            android:name=".merchantClasses.MerchantTokenService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
 
         <service
-            android:name=".MerchantClasses.MerchantMessageReceiverService">
+            android:name=".merchantClasses.MerchantMessageReceiverService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>

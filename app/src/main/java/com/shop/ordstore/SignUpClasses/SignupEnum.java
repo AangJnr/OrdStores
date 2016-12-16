@@ -1,4 +1,4 @@
-package com.shop.ordstore.SignUpClasses;
+package com.shop.ordstore.signUpClasses;
 
 import com.shop.ordstore.R;
 

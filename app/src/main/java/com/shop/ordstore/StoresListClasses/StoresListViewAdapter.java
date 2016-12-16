@@ -1,4 +1,4 @@
-package com.shop.ordstore.StoresListClasses;
+package com.shop.ordstore.storesListClasses;
 
 /**
  * Created by AangJnr on 7/19/16.
@@ -22,9 +22,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.shop.ordstore.DatabaseHelper;
+import com.shop.ordstore.utilities.DatabaseHelper;
 import com.shop.ordstore.R;
-import com.shop.ordstore.UserClasses.StoreTile;
+import com.shop.ordstore.userClasses.StoreTile;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -161,7 +161,7 @@ public class StoresListViewAdapter extends RecyclerView.Adapter<StoresListViewAd
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name;
         ImageView logo;
-        LinearLayout mainHolder;
+        View mainHolder;
         TextView follow;
         RelativeLayout nameHolder;
         ImageView place_holder;
@@ -172,7 +172,7 @@ public class StoresListViewAdapter extends RecyclerView.Adapter<StoresListViewAd
 
             name = (TextView) view.findViewById(R.id.list_item_name);
             logo = (ImageView) view.findViewById(R.id.list_item_image);
-            mainHolder = (LinearLayout) view.findViewById(R.id.mainHolder);
+            mainHolder = (View) view.findViewById(R.id.mainHolder);
             nameHolder = (RelativeLayout) itemView.findViewById(R.id.store_list_nameholder);
             follow = (TextView) view.findViewById(R.id.follow);
             place_holder = (ImageView) view.findViewById(R.id.stores_list_placeholder);

@@ -1,7 +1,5 @@
-package com.shop.ordstore.UserClasses;
+package com.shop.ordstore.userClasses;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -28,23 +26,18 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.OvershootInterpolator;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.shop.ordstore.DepthPageTransformer;
 import com.shop.ordstore.R;
-import com.shop.ordstore.SignUpClasses.SignUpActivity;
-import com.shop.ordstore.DatabaseHelper;
-import com.shop.ordstore.StoresListClasses.StoresListActivity;
-import com.shop.ordstore.Utils;
+import com.shop.ordstore.signUpClasses.SignUpActivity;
+import com.shop.ordstore.utilities.DatabaseHelper;
+import com.shop.ordstore.storesListClasses.StoresListActivity;
+import com.shop.ordstore.utilities.Utils;
+import com.shop.ordstore.utilities.ZoomOutPageTransformer;
 
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navView;
     Boolean pendingIntroAnimation;
     FloatingActionButton fab;
-    ImageView ord;
+
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
-    TextView appbar_email, appbar_name;
+    //TextView appbar_email, appbar_name;
     static String _name, _email, _phone, _user_uid;
 
 
@@ -87,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
         dbHelper = new DatabaseHelper(this);
 
 
-        appbar_name = (TextView) findViewById(R.id.appbar_user_name);
-        appbar_email = (TextView) findViewById(R.id.appbar_user_email);
+        //appbar_name = (TextView) findViewById(R.id.appbar_user_name);
+        //appbar_email = (TextView) findViewById(R.id.appbar_user_email);
 
 
         if (!isMyServiceRunning(OrdServiceRevised.class)) {
@@ -102,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         fab = (FloatingActionButton) findViewById(R.id.fab_main);
 
-        ord = (ImageView) findViewById(R.id.ordLogo);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.app_name);
 
@@ -191,12 +184,12 @@ public class MainActivity extends AppCompatActivity {
         if (sharedpreferences.contains(Name)) {
             _name = sharedpreferences.getString(Name, "Null");
             name.setText(_name);
-            appbar_name.setText(_name);
+            //appbar_name.setText(_name);
         }
         if (sharedpreferences.contains(Email)) {
             _email = sharedpreferences.getString(Email, "Null");
             email.setText(_email);
-            appbar_email.setText(_email);
+            //appbar_email.setText(_email);
 
         }
         if (sharedpreferences.contains(Uid)) {
@@ -209,14 +202,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
-
-
-
-
-
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setPageTransformer(true, new DepthPageTransformer());
+        viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -367,6 +354,15 @@ public class MainActivity extends AppCompatActivity {
                         logout_dialog.show();
                         break;
 
+
+
+
+                    case(R.id.payment):
+                        navDrawer.closeDrawers();
+                        startActivity(new Intent(MainActivity.this, Payments.class));
+
+                        break;
+
                 }
 
 
@@ -435,14 +431,14 @@ public class MainActivity extends AppCompatActivity {
 
         int actionbarSize = Utils.dpToPx(56);
         toolbar.setTranslationY(-actionbarSize);
-        ord.setTranslationY(-actionbarSize);
+        //ord.setTranslationY(-actionbarSize);
 
 
         toolbar.animate()
                 .translationY(0)
                 .setDuration(ANIM_DURATION_TOOLBAR)
                 .setStartDelay(300);
-        ord.animate()
+       /* ord.animate()
                 .translationY(0)
                 .setDuration(ANIM_DURATION_TOOLBAR)
                 .setStartDelay(400)
@@ -452,7 +448,7 @@ public class MainActivity extends AppCompatActivity {
                         startContentAnimation();
                     }
                 })
-                .start();
+                .start();*/
     }
 
     private void startContentAnimation() {

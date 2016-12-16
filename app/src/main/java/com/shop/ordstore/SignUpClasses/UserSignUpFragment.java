@@ -1,4 +1,4 @@
-package com.shop.ordstore.SignUpClasses;
+package com.shop.ordstore.signUpClasses;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -6,17 +6,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,14 +34,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.shop.ordstore.R;
-import com.shop.ordstore.UserClasses.User;
-import com.shop.ordstore.UserClasses.MainActivity;
+import com.shop.ordstore.userClasses.User;
+import com.shop.ordstore.userClasses.MainActivity;
 
 
 /**
  * Created by AangJnr on 9/2/16.
  */
-public class UserSignUpFragment extends Fragment {
+public class UserSignUpFragment extends Fragment implements TextView.OnEditorActionListener{
     public static final String Prefs_Name = "user";
     public static final String UserId = "uidKey";
     public static final String Name = "nameKey";
@@ -56,7 +57,7 @@ public class UserSignUpFragment extends Fragment {
     TextView bottomText;
     TextView bottomTextQuerry;
     Animation fadeIn, slideUp, fadeOut;
-    FloatingActionButton login_fab;
+    TextView login_fab;
     ImageView ord, basket;
     boolean sign_in_activated = true;
     SharedPreferences user_prefs;
@@ -128,15 +129,17 @@ public class UserSignUpFragment extends Fragment {
         password_layout = (TextInputLayout) rootView.findViewById(R.id.user_password_layout);
         phone_no_layout = (TextInputLayout) rootView.findViewById(R.id.user_phone_no_layout);
 
-        _nameText = (EditText) rootView.findViewById(R.id.user_username);
-        _emailText = (EditText) rootView.findViewById(R.id.user_email);
-        _passwordText = (EditText) rootView.findViewById(R.id.user_password);
-        _phone_noText = (EditText) rootView.findViewById(R.id.user_phone);
+        _nameText = name_layout.getEditText();
+        _emailText = email_layout.getEditText();
+        _passwordText = password_layout.getEditText();
+        _phone_noText = phone_no_layout.getEditText();
+
+
 
         bottomTextQuerry = (TextView) rootView.findViewById(R.id.bottom_text_querry);
 
 
-        login_fab = (FloatingActionButton) rootView.findViewById(R.id.user_login_fab);
+        login_fab = (TextView) rootView.findViewById(R.id.button_text);
         bottomText = (TextView) rootView.findViewById(R.id.bottom_text);
 
         ord = (ImageView) rootView.findViewById(R.id.ord);
@@ -203,7 +206,7 @@ public class UserSignUpFragment extends Fragment {
 
         // Always call the superclass so it can save the view hierarchy state
 
-        super.onCreate(savedInstanceState);
+        super.onActivityCreated(savedInstanceState);
 
 
         if (savedInstanceState == null) {
@@ -219,7 +222,7 @@ public class UserSignUpFragment extends Fragment {
 
 
 
-        visibility = (ImageView) getActivity().findViewById(R.id.user_visibility_toggle);
+        visibility = (ImageView) getActivity().findViewById(R.id.user_password_visibility_toggle);
         visibility.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -246,6 +249,11 @@ public class UserSignUpFragment extends Fragment {
 
             }
         });
+
+        _nameText.setOnEditorActionListener(this);
+        _emailText.setOnEditorActionListener(this);
+        _passwordText.setOnEditorActionListener(this);
+        _phone_noText.setOnEditorActionListener(this);
 
 
 
@@ -619,6 +627,26 @@ public class UserSignUpFragment extends Fragment {
         super.onStop();
 
     }
+
+    @Override
+    public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+
+        name = _nameText.getText().toString();
+        email = _emailText.getText().toString();
+        password = _passwordText.getText().toString();
+        phone = _phone_noText.getText().toString();
+
+
+        signIn();
+
+        return true;
+    }
+
+
+
+
 
 
 }

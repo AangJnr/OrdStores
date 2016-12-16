@@ -1,11 +1,9 @@
-package com.shop.ordstore.MerchantClasses;
+package com.shop.ordstore.merchantClasses;
 
-import android.content.DialogInterface;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,9 +18,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.shop.ordstore.R;
-import com.shop.ordstore.StoreProductList.Product;
-import com.shop.ordstore.UserClasses.SpacesItemDecoration;
-import com.shop.ordstore.Utils;
+import com.shop.ordstore.storeProductList.Product;
+import com.shop.ordstore.utilities.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
