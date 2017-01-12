@@ -1,12 +1,12 @@
 package com.shop.ordstore.utilities;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 
 import com.shop.ordstore.merchantClasses.MerchantMainActivity;
 import com.shop.ordstore.R;
+import com.shop.ordstore.signUpClasses.SignUpActivity;
 import com.shop.ordstore.userClasses.MainActivity;
 import com.shop.ordstore.introslides.AppTourPermissions;
 
@@ -26,8 +27,8 @@ public class SplashActivity extends Activity {
 
 
     Thread splashTread;
-    boolean user_first_run, merchant_first_run;
-    SharedPreferences user_sharedpreferences, merchant_sharedpreferences;
+    boolean userFirstRun, merchantFirstRun, isFirstInstall;
+    SharedPreferences sharedpreferences;
 
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -46,15 +47,15 @@ public class SplashActivity extends Activity {
         }
         setContentView(R.layout.splash_screen);
 
-        String Prefs_Name = "user";
-        String merchant_Prefs_Name = "merchant";
+
+        sharedpreferences = PreferenceManager.getDefaultSharedPreferences(SplashActivity.this);
+
+        userFirstRun = sharedpreferences.getBoolean(ConstantStrings.IS_USER_SIGNED_IN, Boolean.FALSE);
 
 
-        user_sharedpreferences = getSharedPreferences(Prefs_Name, Context.MODE_PRIVATE);
-        user_first_run = user_sharedpreferences.getBoolean("IsSignedIn", Boolean.FALSE);
+        merchantFirstRun = sharedpreferences.getBoolean(ConstantStrings.IS_MERCHANT_SIGNED_IN, Boolean.FALSE);
 
-        merchant_sharedpreferences = getSharedPreferences(merchant_Prefs_Name, Context.MODE_PRIVATE);
-        merchant_first_run = merchant_sharedpreferences.getBoolean("IsSignedIn", Boolean.FALSE);
+        isFirstInstall = sharedpreferences.getBoolean(ConstantStrings.IS_FIRST_INSTALL, Boolean.TRUE);
 
 
         StartAnimations();
@@ -94,19 +95,26 @@ public class SplashActivity extends Activity {
                         waited += 100;
                     }
 
-                    if (user_first_run) {
+                    if (userFirstRun && !isFirstInstall) {
 
                         Intent intent = new Intent(SplashActivity.this,
                                 MainActivity.class);
                         startActivity(intent);
 
 
-                    } else if (merchant_first_run) {
+                    } else if (merchantFirstRun && !isFirstInstall) {
 
                         Intent intent = new Intent(SplashActivity.this,
                                 MerchantMainActivity.class);
                         startActivity(intent);
-                    } else {
+                    }
+                    else if(!isFirstInstall){
+
+                        Intent intent = new Intent(SplashActivity.this,
+                                SignUpActivity.class);
+                        startActivity(intent);
+
+                    }else {
 
                         Intent intent = new Intent(SplashActivity.this,
                                 AppTourPermissions.class);

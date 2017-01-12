@@ -34,7 +34,6 @@ public class StarredOrders extends AppCompatActivity {
     public static RelativeLayout emptyView;
     List<OrderTile> orderTile;
     RecyclerView recycler;
-    SharedPreference sharedPreference;
     FloatingActionButton fab_delete;
     private OrdersCardAdapter mAdapter;
 

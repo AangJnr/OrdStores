@@ -36,7 +36,7 @@ public class UserTokenService extends FirebaseInstanceIdService {
     private void sendRegistrationToServer(String token) {
 
 
-        userDatabase.child(MainActivity.get_user_uid()).child("token_id").setValue(token)
+        userDatabase.child(MainActivity.getUserUid()).child("token_id").setValue(token)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

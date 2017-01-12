@@ -4,7 +4,7 @@
     android:layout_height="@dimen/drawer_header_height"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/login_gradient_background"
     android:gravity="bottom"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
@@ -16,20 +16,22 @@
 
 <de.hdodenhof.circleimageview.CircleImageView
     android:id="@+id/profile_photo"
-    android:layout_width="56dp"
-    android:layout_height="56dp"
+    android:layout_width="70dp"
+    android:layout_height="70dp"
     android:src="@drawable/aangjnr"
     android:layout_marginTop="24dp"
     app:civ_border_width="2dp"
-
-    app:civ_border_color="@color/white"
+    android:layout_centerHorizontal="true"
+    app:civ_border_color="@color/text_white_87"
     />
+
 
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="56dp"
     android:orientation="vertical"
     android:layout_marginTop="16dp"
+    android:gravity="center_horizontal"
     android:layout_below="@id/profile_photo">
 
     <TextView
@@ -38,6 +40,7 @@
         android:text="User name"
         android:id="@+id/header_user_name"
         android:textSize="16sp"
+        android:textColor="@color/white"
         android:fontFamily="sans-serif-medium"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
 
@@ -45,11 +48,11 @@
         />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/header_user_name"
         android:id="@+id/header_user_email"
         android:text="ordstores@gmail.com"
+        android:textColor="@color/text_white_87"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 </LinearLayout>

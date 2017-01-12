@@ -8,6 +8,7 @@ public class User {
     private String name;
     private String email;
     private String phone;
+    private String photo;
 
 
     public User() {
@@ -15,10 +16,11 @@ public class User {
     }
 
 
-    public User(String username, String email, String phone) {
+    public User(String username, String email, String phone, String photo) {
         this.name = username;
         this.email = email;
         this.phone = phone;
+        this.photo = photo;
     }
 
     //Getters and setters
@@ -44,5 +46,13 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

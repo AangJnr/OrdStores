@@ -1,3 +1,4 @@
+/*
 package com.shop.ordstore.signUpClasses;
 
 import android.app.ProgressDialog;
@@ -35,9 +36,11 @@ import com.shop.ordstore.merchantClasses.MerchantMainActivity;
 import com.shop.ordstore.R;
 
 
+*/
 /**
  * Created by AangJnr on 9/2/16.
- */
+ *//*
+
 public class MerchantSignUpFragment extends Fragment implements TextView.OnEditorActionListener {
     View rootView;
     EditText _emailText, _passwordText;
@@ -125,35 +128,6 @@ public class MerchantSignUpFragment extends Fragment implements TextView.OnEdito
         // Always call the superclass so it can save the view hierarchy state
         super.onActivityCreated(savedInstanceState);
 
-
-
-        visibility2 = (ImageView) getActivity().findViewById(R.id.password_visibility_toggle);
-        /*visibility2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                int start, end;
-
-                if (!isPasswordVisible) {
-                    visibility2.setImageResource(R.drawable.ic_visibility_white_24dp);
-                    start = _passwordText.getSelectionStart();
-                    end = _passwordText.getSelectionEnd();
-                    _passwordText.setTransformationMethod(null);
-                    _passwordText.setSelection(start, end);
-                    isPasswordVisible = true;
-
-                } else {
-                    visibility2.setImageResource(R.drawable.ic_visibility_off_white_24dp);
-                    start = _passwordText.getSelectionStart();
-                    end = _passwordText.getSelectionEnd();
-                    _passwordText.setTransformationMethod(new PasswordTransformationMethod());
-                    _passwordText.setSelection(start, end);
-                    isPasswordVisible = false;
-                }
-
-
-            }
-        });*/
 
         _emailText.setOnEditorActionListener(this);
         _passwordText.setOnEditorActionListener(this);
@@ -293,18 +267,7 @@ public class MerchantSignUpFragment extends Fragment implements TextView.OnEdito
     }
 
 
-    public void onSignInSuccess() {
-        login_fab.setEnabled(true);
-        getActivity().startActivity(new Intent(getActivity(), MerchantMainActivity.class));
-        getActivity().finish();
-    }
 
-
-    public void onSignInFailed() {
-        Toast.makeText(getActivity(), "Login failed. Please contact the OrdStores Team", Toast.LENGTH_LONG).show();
-
-        login_fab.setEnabled(true);
-    }
 
     @Override
     public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -321,3 +284,4 @@ public class MerchantSignUpFragment extends Fragment implements TextView.OnEdito
             return true;
     }
 }
+*/

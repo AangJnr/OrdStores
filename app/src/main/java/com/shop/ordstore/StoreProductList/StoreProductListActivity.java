@@ -315,8 +315,11 @@ public class StoreProductListActivity extends AppCompatActivity  {
 
 
 
+/*
     private void revealShow(View rootView, boolean reveal, final AlertDialog dialog) {
+
         final View view = rootView.findViewById(R.id.reveal_view);
+
         int w = view.getWidth();
         int h = view.getHeight();
         float maxRadius = (float) Math.sqrt(w * w / 4 + h * h / 4);
@@ -348,6 +351,7 @@ public class StoreProductListActivity extends AppCompatActivity  {
             anim.start();
         }
     }
+*/
 
     public static String merchantID(){
         String uid = get_merchant_uid;

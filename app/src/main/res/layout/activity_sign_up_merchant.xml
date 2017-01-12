@@ -55,7 +55,7 @@
 
 
         <RelativeLayout
-            android:id="@+id/logo_linear_layout"
+            android:id="@+id/ord_icon"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="24dp"
@@ -164,7 +164,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/white"
-                        app:passwordToggleDrawable="@color/white"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="@color/divider"
                         app:errorTextAppearance="@style/ErrorText"
                         >
 
@@ -184,6 +185,7 @@
 
 
                     <ImageView
+                        android:visibility="gone"
                         android:id="@+id/password_visibility_toggle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

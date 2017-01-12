@@ -101,7 +101,6 @@
         <item name="colorControlNormal">@color/divider</item>
         <item name="colorControlActivated">@color/colorPrimary</item>
         <item name="colorControlHighlight">@color/colorPrimary</item>
-        <item name="android:textSize">13sp</item>
         <item name="colorAccent">@color/colorPrimary</item>
 
     </style>
@@ -148,6 +147,12 @@
         <item name="windowActionBarOverlay">true</item>
     </style>
 
+
+    <style name="AppAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- To tint the buttons -->
+        <item name="colorAccent">@color/colorPrimary</item>
+
+    </style>
 
 
 </resources>

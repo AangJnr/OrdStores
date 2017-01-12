@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
@@ -21,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.shop.ordstore.utilities.ConstantStrings;
 import com.shop.ordstore.utilities.DatabaseHelper;
 import com.shop.ordstore.R;
 
@@ -37,9 +39,8 @@ public class UserService extends Service {
     private FirebaseAuth mAuth;
     private ChildEventListener mChildEventListener;
     String _userUid;
-    String User_Prefs_Name = "user";
+    Context context;
 
-    String Uid = "uidKey";
 
 
 
@@ -50,11 +51,10 @@ public class UserService extends Service {
         userDatabase = FirebaseDatabase.getInstance().getReference().child("users");
         ordersDataBaseHelper = new DatabaseHelper(this);
 
-        SharedPreferences sharedpreferences = getSharedPreferences(User_Prefs_Name,
-                Context.MODE_PRIVATE);
+        SharedPreferences sharedpreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        if (sharedpreferences.contains(Uid)) {
-            _userUid = sharedpreferences.getString(Uid, "Null");
+        if (sharedpreferences.contains(ConstantStrings.USER_UID)) {
+            _userUid = sharedpreferences.getString(ConstantStrings.USER_UID, null);
 
         }
 
@@ -76,7 +76,7 @@ public class UserService extends Service {
         // TODO Auto-generated method stub
         //Log.d(Utils.LogTag, "ChatHeadService.onStartCommand() -> startId=" + startId);
 
-        if(mAuth.getCurrentUser() != null) {
+        if(mAuth.getCurrentUser() != null && _userUid != null) {
 
             Log.i("User Service start", _userUid);
 

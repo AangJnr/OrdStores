@@ -6,74 +6,72 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:elevation="7dp"
     android:animateLayoutChanges="true"
     tools:context=".userClasses.MainActivity">
 
 
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:id="@+id/cord_lay"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
 
-
-        <android.support.design.widget.CoordinatorLayout
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:id="@+id/cord_lay"
-            android:layout_height="match_parent"
-           >
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-            <android.support.design.widget.AppBarLayout
-                android:id="@+id/appbar"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fitsSystemWindows="true"
-                android:theme="@style/AppTheme.AppBarOverlay">
-
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@color/colorPrimary"
-                    app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
-                    app:popupTheme="@style/Theme.AppCompat.NoActionBar"
-                    />
-
-
-
-                <android.support.design.widget.TabLayout
-                    android:id="@+id/tabs"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@color/colorPrimary"
-                    app:tabIndicatorColor="@color/transparent"
-                    app:tabSelectedTextColor="@color/tab_text_selected"
-                    app:tabTextAppearance="@style/CustomTabTextAppearance" />
-            </android.support.design.widget.AppBarLayout>
-
-
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            </android.support.v4.view.ViewPager>
-
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab_main"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="16dp"
-                android:clickable="true"
-                app:fabSize="normal"
-                android:src="@drawable/ic_stat_image_control_point_duplicate"
-                android:tint="@color/white"
-                app:layout_behavior="com.shop.ordstore.utilities.FABScrollBehavior"
-                app:layout_anchorGravity="bottom|right|end"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorPrimary"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+                app:popupTheme="@style/Theme.AppCompat.NoActionBar"
                 />
 
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorPrimary"
+                app:tabIndicatorColor="@color/transparent"
+                app:tabSelectedTextColor="@color/tab_text_selected"
+                app:tabTextAppearance="@style/CustomTabTextAppearance" />
+        </android.support.design.widget.AppBarLayout>
 
-        </android.support.design.widget.CoordinatorLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
+
+        </android.support.v4.view.ViewPager>
+
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_gravity="bottom|right"
+            app:fabSize="normal"
+            android:src="@drawable/ic_stat_image_control_point_duplicate"
+            android:tint="@color/white"
+            app:borderWidth="0dp"
+            android:clickable="true"
+            app:layout_behavior="com.shop.ordstore.utilities.FABScrollBehavior"
+            />
+    </android.support.design.widget.CoordinatorLayout>
+
 
 
     <android.support.design.widget.NavigationView

@@ -1,23 +1,33 @@
 package com.shop.ordstore.merchantClasses;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.shop.ordstore.userClasses.MainActivity;
+import com.shop.ordstore.utilities.ConstantStrings;
 import com.shop.ordstore.utilities.DepthPageTransformer;
 import com.shop.ordstore.userClasses.OrdServiceRevised;
 import com.shop.ordstore.R;
@@ -36,12 +46,11 @@ public class MerchantMainActivity extends AppCompatActivity {
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
+    DrawerLayout navDrawer;
+    NavigationView navView;
 
-    String Merchant_Prefs_Name = "merchant";
-    String Merchant_Id = "uidKey";
-    String Merchant_Name = "nameKey";
-    String Merchant_Email = "emailKey";
-    String Merchant_Phone = "phoneKey";
+    ActionBarDrawerToggle actionBarDrawerToggle;
+
 
     static String _name, _email, _phone, _uid;
 
@@ -67,13 +76,48 @@ public class MerchantMainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-        //IsRunnung Service code here
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setFitsSystemWindows(true);
+
+        navDrawer = (DrawerLayout) findViewById(R.id.merchant_drawer_layout);
+        //android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(
+                this,
+                navDrawer,
+                toolbar,
+                R.string.open,
+                R.string.close
+        )
+
+        {
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                invalidateOptionsMenu();
+                syncState();
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                invalidateOptionsMenu();
+                syncState();
+            }
+        };
+        navDrawer.addDrawerListener(actionBarDrawerToggle);
+
+
+
         //Set the custom toolbar
         if (toolbar != null) {
             setSupportActionBar(toolbar);
         }
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(R.string.app_name);
+        //getSupportActionBar().setIcon(R.drawable.ord_icon_no_border);
+
+        actionBarDrawerToggle.syncState();
+
+
 
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -86,33 +130,36 @@ public class MerchantMainActivity extends AppCompatActivity {
 
 
 
+        navView = (NavigationView) findViewById(R.id.merchant_navigation_view);
+        View hView = navView.getHeaderView(0);
+        TextView name = (TextView) hView.findViewById(R.id.header_merchant_name);
+        TextView email = (TextView) hView.findViewById(R.id.header_merchant_email);
 
 
 
 
-        SharedPreferences sharedpreferences = getSharedPreferences(Merchant_Prefs_Name,
-                Context.MODE_PRIVATE);
+        SharedPreferences sharedpreferences = PreferenceManager.getDefaultSharedPreferences(MerchantMainActivity.this);
 
-        if (sharedpreferences.contains(Merchant_Name)) {
-            _name = sharedpreferences.getString(Merchant_Name, "Null");
-
-        }
-        if (sharedpreferences.contains(Merchant_Email)) {
-            _email = sharedpreferences.getString(Merchant_Email, "Null");
-
-
-        }
-        if (sharedpreferences.contains(Merchant_Id)) {
-            _uid = sharedpreferences.getString(Merchant_Id, "Null");
+        if (sharedpreferences.contains(ConstantStrings.MERCHANT_NAME)) {
+            _name = sharedpreferences.getString(ConstantStrings.MERCHANT_NAME, null);
+            name.setText(_name);
 
         }
-        if (sharedpreferences.contains(Merchant_Phone)) {
-            _phone = sharedpreferences.getString(Merchant_Phone, "Null");
+        if (sharedpreferences.contains(ConstantStrings.MERCHANT_EMAIL)) {
+            _email = sharedpreferences.getString(ConstantStrings.MERCHANT_EMAIL, null);
+            email.setText(_email);
+
+
 
         }
+        if (sharedpreferences.contains(ConstantStrings.MERCHANT_UID)) {
+            _uid = sharedpreferences.getString(ConstantStrings.MERCHANT_UID, null);
 
+        }
+        if (sharedpreferences.contains(ConstantStrings.MERCHANTS_PHONE)) {
+            _phone = sharedpreferences.getString(ConstantStrings.MERCHANTS_PHONE, null);
 
-
+        }
 
 
 
@@ -207,26 +254,53 @@ public class MerchantMainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.logout: {
 
+                navDrawer.closeDrawers();
+                final AlertDialog.Builder logout_alert_builder = new AlertDialog.Builder(MerchantMainActivity.this, R.style.AppAlertDialog)
+                        .setTitle("Logging you out!")
+                        .setMessage("Are you sure?")
+                        .setCancelable(true)
+                        .setIcon(R.drawable.attention_96)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-                try {
-                    if(mAuth.getCurrentUser() != null){
-                        mAuth.signOut();
-                    }
-                    if(mAuth.getCurrentUser() == null){
-                        String Merchant_Prefs_Name = "merchant";
-                        SharedPreferences sharedpreferences = getSharedPreferences(Merchant_Prefs_Name,
-                                Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedpreferences.edit();
-                        editor.clear();
-                        editor.commit();
-                        dbHelper.deleteAllMerchantTables();
-                    stopService(new Intent(MerchantMainActivity.this, OrdServiceRevised.class));
-                    startActivity(new Intent(MerchantMainActivity.this, SignUpActivity.class));
-                    finish();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+
+                                try {
+                                    if(mAuth.getCurrentUser() != null){
+                                        mAuth.signOut();
+                                    }
+                                    if(mAuth.getCurrentUser() == null){
+
+                                        SharedPreferences sharedpreferences = PreferenceManager.
+                                                getDefaultSharedPreferences(MerchantMainActivity.this);
+                                        SharedPreferences.Editor editor = sharedpreferences.edit();
+                                        editor.clear();
+                                        editor.apply();
+
+                                        editor.putBoolean(ConstantStrings.IS_FIRST_INSTALL, false);
+                                        editor.apply();
+                                        dbHelper.deleteAllMerchantTables();
+                                        stopService(new Intent(MerchantMainActivity.this, OrdServiceRevised.class));
+                                        startActivity(new Intent(MerchantMainActivity.this, SignUpActivity.class));
+                                        finish();
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+
+
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                                dialog.dismiss();
+                            }
+                        });
+                AlertDialog logout_dialog = logout_alert_builder.create();
+                logout_dialog.show();
 
 
                 return true;

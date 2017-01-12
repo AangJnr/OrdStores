@@ -1,45 +1,74 @@
 package com.shop.ordstore.userClasses;
 
+import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.ActivityManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.OvershootInterpolator;
+import android.view.animation.BounceInterpolator;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnPausedListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.shop.ordstore.R;
 import com.shop.ordstore.signUpClasses.SignUpActivity;
+import com.shop.ordstore.utilities.ConstantStrings;
 import com.shop.ordstore.utilities.DatabaseHelper;
 import com.shop.ordstore.storesListClasses.StoresListActivity;
 import com.shop.ordstore.utilities.Utils;
 import com.shop.ordstore.utilities.ZoomOutPageTransformer;
+import com.squareup.picasso.Picasso;
 
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -54,13 +83,21 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navView;
     Boolean pendingIntroAnimation;
     FloatingActionButton fab;
+    CircleImageView profilePhotoHolder;
 
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
     //TextView appbar_email, appbar_name;
-    static String _name, _email, _phone, _user_uid;
+    static String _name, _email, _phone, _user_uid, _profilePhoto;
+
+    String decodedString;
+    int PERMISSION_STORAGE = 2;
+    public static int RESULT_LOAD_IMG = 1;
+    private StorageReference mStorageRef;
+    private DatabaseReference usersDatabase;
+    SharedPreferences sharedPreferences;
 
 
     private int[] tabIcons = {
@@ -76,6 +113,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        usersDatabase = FirebaseDatabase.getInstance().getReference();
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+
         mAuth = FirebaseAuth.getInstance();
         dbHelper = new DatabaseHelper(this);
 
@@ -97,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.app_name);
+
 
         //setSupportActionBar(toolbar);
 
@@ -124,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                 syncState();
             }
         };
-        navDrawer.setDrawerListener(actionBarDrawerToggle);
+        navDrawer.addDrawerListener(actionBarDrawerToggle);
 
         //Set the custom toolbar
         if (toolbar != null) {
@@ -132,6 +174,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(R.string.app_name);
+        //getSupportActionBar().setIcon(R.drawable.ord_icon_no_border);
 
         actionBarDrawerToggle.syncState();
 
@@ -158,47 +202,64 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-       /* final CircleImageView profile_photo = (CircleImageView) hView.findViewById(R.id.profile_photo);
+        profilePhotoHolder = (CircleImageView) hView.findViewById(R.id.profile_photo);
 
-        Bitmap photo =((BitmapDrawable)profile_photo.getDrawable()).getBitmap();
+        /*Bitmap photo =((BitmapDrawable)profilePhotoHolder.getDrawable()).getBitmap();
         if(photo != null) {
             Palette.generateAsync(photo, new Palette.PaletteAsyncListener() {
                 public void onGenerated(Palette palette) {
                     int mutedLight = palette.getMutedColor(getResources().getColor(R.color.colorPrimaryDark));
-                    profile_photo.setBorderColor(mutedLight);
+                    profilePhotoHolder.setBorderColor(mutedLight);
                 }
             });
         }*/
 
+        profilePhotoHolder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        //String Prefs_Name = "user";
-        String Name = "nameKey";
-        String Email = "emailKey";
-        String Uid = "uidKey";
-        String Phone = "phoneKey";
+                if(!hasPermissions(getApplicationContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_STORAGE);
+                }else {
+                    loadImageFromGallery();
+
+                }
+
+            }
+        });
 
 
-        SharedPreferences sharedpreferences = getSharedPreferences(Prefs_Name,
-                Context.MODE_PRIVATE);
 
-        if (sharedpreferences.contains(Name)) {
-            _name = sharedpreferences.getString(Name, "Null");
+
+
+        SharedPreferences sharedpreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+
+        if (sharedpreferences.contains(ConstantStrings.USER_NAME)) {
+            _name = sharedpreferences.getString(ConstantStrings.USER_NAME, null);
             name.setText(_name);
             //appbar_name.setText(_name);
         }
-        if (sharedpreferences.contains(Email)) {
-            _email = sharedpreferences.getString(Email, "Null");
+        if (sharedpreferences.contains(ConstantStrings.USER_EMAIL)) {
+            _email = sharedpreferences.getString(ConstantStrings.USER_EMAIL, null);
             email.setText(_email);
             //appbar_email.setText(_email);
 
         }
-        if (sharedpreferences.contains(Uid)) {
-            _user_uid = sharedpreferences.getString(Uid, "Null");
+        if (sharedpreferences.contains(ConstantStrings.USER_UID)) {
+            _user_uid = sharedpreferences.getString(ConstantStrings.USER_UID, null);
 
         }
-        if (sharedpreferences.contains(Phone)) {
-            _phone = sharedpreferences.getString(Phone, "Null");
+        if (sharedpreferences.contains(ConstantStrings.USERS_PHONE)) {
+            _phone = sharedpreferences.getString(ConstantStrings.USERS_PHONE, null);
 
+        }
+        if (sharedpreferences.contains(ConstantStrings.USER_PHOTO_URL)) {
+            _profilePhoto = sharedpreferences.getString(ConstantStrings.USER_PHOTO_URL, null);
+
+            Log.i("Profile Photo", _profilePhoto);
+
+            if(_profilePhoto != null)
+            Picasso.with(this).load(Uri.parse(_profilePhoto)).into(profilePhotoHolder);
         }
 
 
@@ -289,12 +350,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -308,7 +363,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.sign_out:
                         navDrawer.closeDrawers();
-                        final AlertDialog.Builder logout_alert_builder = new AlertDialog.Builder(MainActivity.this)
+                        final AlertDialog.Builder logout_alert_builder = new AlertDialog.Builder(MainActivity.this, R.style.AppAlertDialog)
                                 .setTitle("Logging you out!")
                                 .setMessage("Are you sure?")
                                 .setCancelable(true)
@@ -324,11 +379,14 @@ public class MainActivity extends AppCompatActivity {
                                             }
                                             if(mAuth.getCurrentUser() == null){
 
-                                                SharedPreferences sharedpreferences = getSharedPreferences(Prefs_Name,
-                                                        Context.MODE_PRIVATE);
+                                                SharedPreferences sharedpreferences = PreferenceManager.
+                                                        getDefaultSharedPreferences(MainActivity.this);
                                                 SharedPreferences.Editor editor = sharedpreferences.edit();
                                                 editor.clear();
-                                                editor.commit();
+                                                editor.apply();
+
+                                                editor.putBoolean(ConstantStrings.IS_FIRST_INSTALL, false);
+                                                editor.apply();
 
                                                 dbHelper.deleteAllUserTables();
 
@@ -437,24 +495,21 @@ public class MainActivity extends AppCompatActivity {
         toolbar.animate()
                 .translationY(0)
                 .setDuration(ANIM_DURATION_TOOLBAR)
-                .setStartDelay(300);
-       /* ord.animate()
-                .translationY(0)
-                .setDuration(ANIM_DURATION_TOOLBAR)
-                .setStartDelay(400)
+                .setStartDelay(300)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         startContentAnimation();
                     }
                 })
-                .start();*/
+                .start();
     }
+
 
     private void startContentAnimation() {
         fab.animate()
                 .translationY(0)
-                .setInterpolator(new OvershootInterpolator(1.f))
+                .setInterpolator(new BounceInterpolator())
                 .setStartDelay(300)
                 .setDuration(ANIM_DURATION_FAB)
                 .start();
@@ -554,28 +609,182 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public boolean hasPermissions(Context context, String permission) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null) {
+
+            if (ContextCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)){
 
 
+                }
+                return false;
+            }
 
-    public static String get_name(){
-        String username = _name;
-        return username;
+        }
+        return true;
     }
 
-    public static String get_email(){
-        String useremail = _email;
-        return useremail;
+
+    public void loadImageFromGallery() {
+        // Create intent to Open Image applications like Gallery, Google Photos
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        // Start the Intent
+        startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
+
     }
 
-    public static String get_user_uid(){
-        String uid = _user_uid;
-        return uid;
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //try {
+
+            if (resultCode == RESULT_OK) {
+                // When an Image is picked
+                if (requestCode == RESULT_LOAD_IMG) {
+                    // Get the Image from data
+
+                    Uri selectedImage = data.getData();
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA
+                    };
+
+                    // Get the cursor
+                    Cursor cursor = getContentResolver().query(selectedImage,
+                            filePathColumn, null, null, null);
+                    // Move to first row
+                    cursor.moveToFirst();
+
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    decodedString = cursor.getString(columnIndex);
+                    cursor.close();
+
+                    if (decodedString != null) {
+                        //Start Load image into view, upload to firebase and save url
+
+                        final ProgressDialog progress = new ProgressDialog(MainActivity.this);
+                        progress.setMessage("Please wait...");
+                        progress.setCancelable(false);
+
+                        profilePhotoHolder.setImageBitmap(BitmapFactory.decodeFile(decodedString));
+
+                        if(_user_uid != null && !_user_uid.isEmpty()){
+                            progress.show();
+
+
+
+                            StorageReference profilePhotoStorage = mStorageRef.child("users").child(_user_uid).child("profilePhotoHolder.jpg");
+
+
+
+                            Log.i("Storage Ref", String.valueOf(profilePhotoStorage));
+
+                            profilePhotoStorage.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                    Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
+
+                                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                                    String photoUrl = String.valueOf(downloadUrl);
+
+                                    SharedPreferences.Editor editor;
+                                    editor = sharedPreferences.edit();
+                                    editor.putString(ConstantStrings.USER_PHOTO_URL, photoUrl);
+                                    editor.apply();
+
+
+                                    usersDatabase.child("users").child(_user_uid).child("photo").setValue(photoUrl)
+                                            .addOnCompleteListener(MainActivity.this, new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                    if (task.isSuccessful()) {
+                                                        //hide progress
+                                                        progress.dismiss();
+
+                                                    }
+
+                                                }
+                                            });
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    //Toast.makeText(MainActivity.this, "Failure", Toast.LENGTH_SHORT).show();
+                                    Log.i("PictureUploadActivity", e.toString());
+
+                                    SharedPreferences.Editor editor;
+                                    editor = sharedPreferences.edit();
+                                    editor.putString(ConstantStrings.USER_PHOTO_URL, decodedString);
+                                    editor.apply();
+                                    progress.dismiss();
+
+                                   // startUserActivity();
+                                }
+                            }).addOnPausedListener(new OnPausedListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onPaused(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                    taskSnapshot.getTask().cancel();
+                                    Toast.makeText(MainActivity.this, "Image will be saved locally", Toast.LENGTH_SHORT).show();
+                                    if(progress != null)progress.dismiss();
+                                    //startUserActivity();
+
+                                }
+                            });
+                        }
+                    }
+                }
+
+
+            } else {
+                Toast.makeText(this, "You haven't picked an Image",
+                        Toast.LENGTH_LONG).show();
+            }
+
+         /*catch (Exception e) {
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
+                    .show();
+        }*/
+
     }
 
-    public static String get_phone(){
-        String phone = _phone;
-        return phone;
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permission, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permission, grantResults);
+
+
+
+        if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            // Toast.makeText(this, permission[0], Toast.LENGTH_SHORT).show();
+
+            if (requestCode == PERMISSION_STORAGE) {
+
+
+                //resume tasks needing this permission
+                loadImageFromGallery();
+
+            }
+        }
+
     }
+
+
+
+    public static String getUserUid (){
+
+
+        return _user_uid;
+
+
+    }
+
+
 }
 
 

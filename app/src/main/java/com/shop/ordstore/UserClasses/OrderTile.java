@@ -21,6 +21,7 @@ public class OrderTile {
     String merchant_uid;
     String timestamp;
 
+    public OrderTile(){}
 
     public OrderTile(String productName, String itemCode, String quantity, String price,
                      String size, String itemColor, String details, String photoId, String merchant_uid, String timestamp) {

@@ -1,7 +1,9 @@
 package com.shop.ordstore.merchantClasses;
 
+import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -19,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.shop.ordstore.R;
 import com.shop.ordstore.storeProductList.Product;
+import com.shop.ordstore.utilities.ConstantStrings;
 import com.shop.ordstore.utilities.Utils;
 
 import java.util.ArrayList;
@@ -35,6 +38,7 @@ public class ProductsListFragment extends Fragment {
     private GridLayoutManager productsGridLayoutManager;
     private DatabaseReference merchantsDatabaseRef;
     View rootView;
+    SharedPreferences sharedPreferences;
     RelativeLayout emptyView;
     FloatingActionButton fab;
 
@@ -50,7 +54,7 @@ public class ProductsListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
     }
 
@@ -90,10 +94,14 @@ public class ProductsListFragment extends Fragment {
         }
 
 
+        String merchant_uid = null;
+
+        if (sharedPreferences.contains(ConstantStrings.MERCHANT_UID)){
+             merchant_uid = sharedPreferences.getString(ConstantStrings.MERCHANT_UID, null);
+        }
 
 
-
-        merchantsDatabaseRef.child(MerchantMainActivity.getUid()).child("products").addValueEventListener(new ValueEventListener() {
+        merchantsDatabaseRef.child(merchant_uid).child("products").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //Progress show
@@ -124,11 +132,6 @@ public class ProductsListFragment extends Fragment {
 
 
                     }
-
-
-
-
-
                 }
                 //Dismiss progress dialog
 
@@ -143,9 +146,6 @@ public class ProductsListFragment extends Fragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 //Progress dismiss
-
-
-
 
             }
         });
@@ -172,7 +172,7 @@ public class ProductsListFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         // Always call the superclass so it can save the view hierarchy state
-        super.onCreate(savedInstanceState);
+        super.onActivityCreated(savedInstanceState);
 
 
     }
@@ -229,6 +229,14 @@ public class ProductsListFragment extends Fragment {
                 .setDuration(700)
                 .start();
     }
+
+
+
+
+
+
+
+
 
 
 

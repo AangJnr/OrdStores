@@ -1,8 +1,13 @@
 package com.shop.ordstore.merchantClasses;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
@@ -16,6 +21,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shop.ordstore.R;
 import com.shop.ordstore.storeProductList.Product;
@@ -23,6 +29,10 @@ import com.shop.ordstore.utilities.Utils;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -36,7 +46,6 @@ public class MerchantProductListAdapter extends RecyclerView.Adapter<MerchantPro
     private List<Product> products;
     private Context context;
     private int lastAnimatedPosition = -1;
-
     int menuPosition;
 
 
@@ -46,6 +55,8 @@ public class MerchantProductListAdapter extends RecyclerView.Adapter<MerchantPro
      *
      * @param products
      **/
+
+
 
     public MerchantProductListAdapter(Context context, List<Product> products) {
         this.products = products;
@@ -214,7 +225,6 @@ public class MerchantProductListAdapter extends RecyclerView.Adapter<MerchantPro
     }
 
     class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
-
         int position;
         public MyMenuItemClickListener(int position) {
             this.position = position;
@@ -228,7 +238,11 @@ public class MerchantProductListAdapter extends RecyclerView.Adapter<MerchantPro
                 case R.id.share:
 
                     //Share on media
+                    Product product = products.get(position);
+                    String pdt_CODE = product.getItemCode();
+                    Uri pdt_ID = Uri.parse(product.getPhotoId());
 
+                    onShareItem(pdt_CODE, pdt_ID);
                     return true;
 
                 default:
@@ -239,6 +253,54 @@ public class MerchantProductListAdapter extends RecyclerView.Adapter<MerchantPro
 
 
 
+
+
+    public void onShareItem(String ptdCode, Uri photoUrl) {
+        // Get access to bitmap image from view
+
+
+
+        if (photoUrl != null) {
+            // Construct a ShareIntent with link to image
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "order via OrdStores with code " + ptdCode.toUpperCase());
+            shareIntent.putExtra(Intent.EXTRA_STREAM, photoUrl);
+            shareIntent.setType("image/*");
+            // Launch sharing dialog for image
+            context.startActivity(Intent.createChooser(shareIntent, "Share product"));
+        } else {
+            // ...sharing failed, handle error
+        }
+    }
+
+    // Returns the URI path to the Bitmap displayed in specified ImageView
+    public Uri getLocalBitmapUri(ImageView imageView) {
+        // Extract Bitmap from ImageView drawable
+        Drawable drawable = imageView.getDrawable();
+        Bitmap bmp = null;
+        if (drawable instanceof BitmapDrawable){
+            bmp = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+        } else {
+            return null;
+        }
+        // Store image to default external storage directory
+        Uri bmpUri = null;
+        try {
+            // Use methods on Context to access package-specific directories on external storage.
+            // This way, you don't need to request external read/write permission.
+            // See https://youtu.be/5xVh-7ywKpE?t=25m25s
+            File file =  new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image.png");
+            FileOutputStream out = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
+            out.close();
+            // **Warning:** This will fail for API > 24, use a FileProvider as shown below instead.
+            bmpUri = Uri.fromFile(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bmpUri;
+    }
 
 
 

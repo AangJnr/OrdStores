@@ -48,7 +48,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/header_user_name"
+            android:layout_below="@+id/header_merchant_name"
             android:id="@+id/header_merchant_email"
             android:text="ordstores@gmail.com"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />

@@ -12,7 +12,6 @@
 
 
 
-
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:id="@+id/merchant_cord_lay"
@@ -33,14 +32,14 @@
                 android:background="@color/colorPrimary"
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
                 app:popupTheme="@style/Theme.AppCompat.NoActionBar"
-                >
-            </android.support.v7.widget.Toolbar>
+                />
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="8dp"
                 android:background="@color/colorPrimary"
                 app:tabIndicatorColor="@color/transparent"
                 app:tabSelectedTextColor="@color/tab_text_selected"
@@ -64,9 +63,10 @@
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
             android:clickable="true"
+            app:fabSize="normal"
             android:src="@drawable/ic_action_add"
             android:tint="@color/white"
-            app:layout_behavior="com.shop.ordstore.FABScrollBehavior"
+            app:layout_behavior="com.shop.ordstore.utilities.FABScrollBehavior"
             />
 
 
@@ -74,7 +74,7 @@
 
 
     <android.support.design.widget.NavigationView
-        android:id="@+id/navigation_view"
+        android:id="@+id/merchant_navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

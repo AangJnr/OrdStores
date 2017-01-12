@@ -62,7 +62,6 @@
                    android:layout_marginLeft="8dp"
                    android:text="0/0/2016"
                    android:textSize="12sp"
-                   android:fontFamily="sans-serif-smallcaps"
                    />
            </LinearLayout>
 
@@ -108,7 +107,6 @@
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:textSize="10sp"
-                       android:fontFamily="sans-serif-smallcaps"
                        android:text="Phone"/>
                </LinearLayout>
 

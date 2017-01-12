@@ -26,7 +26,6 @@ import com.shop.ordstore.utilities.DatabaseHelper;
 import com.shop.ordstore.utilities.DateUtil;
 import com.shop.ordstore.utilities.ExpandableItemLayout;
 import com.shop.ordstore.R;
-import com.shop.ordstore.sharedPreferences.SharedPreference;
 import com.shop.ordstore.userClasses.UserOrderStatus;
 import com.squareup.picasso.Picasso;
 
@@ -41,7 +40,6 @@ import java.util.List;
 public class PendingOrdersAdapter extends RecyclerView.Adapter<PendingOrdersAdapter.PendingOrdersViewHolder> {
 
     DatabaseHelper pending_ordersDataBaseHelper;
-    static SharedPreference sharedPreference;
     private List<PendingOrder> pendingOrders;
     private Context context;
 
@@ -58,7 +56,6 @@ public class PendingOrdersAdapter extends RecyclerView.Adapter<PendingOrdersAdap
     public PendingOrdersAdapter(Context context, List<PendingOrder> pendingOrders) {
         this.pendingOrders = pendingOrders;
         this.context = context;
-        sharedPreference = new SharedPreference();
         usersRef = FirebaseDatabase.getInstance().getReference().child("users");
         pending_ordersDataBaseHelper = new DatabaseHelper(context);
 
@@ -128,11 +125,11 @@ public class PendingOrdersAdapter extends RecyclerView.Adapter<PendingOrdersAdap
         if(pending_ordersDataBaseHelper.checkPendingOrderStatusApproved(pending_order.getTimestamp()))
         {
             viewHolder.status_text.setText("Approved!");
-            viewHolder.status_text.setTextColor(R.color.colorPrimary);
+            viewHolder.status_text.setTextColor(ContextCompat.getColor(context,R.color.colorPrimary));
 
         }else if(pending_ordersDataBaseHelper.checkPendingOrderStatusDeclined(pending_order.getTimestamp())){
             viewHolder.status_text.setText("Declined!");
-            viewHolder.status_text.setTextColor(R.color.edittext_error_color);
+            viewHolder.status_text.setTextColor(ContextCompat.getColor(context,R.color.edittext_error_color));
 
         }
 

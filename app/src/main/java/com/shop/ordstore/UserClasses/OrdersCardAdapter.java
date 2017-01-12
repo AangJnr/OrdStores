@@ -6,6 +6,8 @@ package com.shop.ordstore.userClasses;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
@@ -33,6 +35,7 @@ import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ObjectAnimator;
+import com.shop.ordstore.utilities.ConstantStrings;
 import com.shop.ordstore.utilities.DatabaseHelper;
 import com.shop.ordstore.utilities.DateUtil;
 import com.shop.ordstore.utilities.ExpandableItemLayout;
@@ -48,9 +51,9 @@ import java.util.Map;
 
 public class OrdersCardAdapter extends RecyclerView.Adapter<OrdersCardAdapter.OrdersViewHolder> {
 
-    DatabaseHelper ordersDataBaseHelper;
+    private DatabaseHelper ordersDataBaseHelper;
     private static final int ANIMATED_ITEMS_COUNT = 2;
-    static SharedPreference sharedPreference;
+    SharedPreferences sharedPreference;
     private List<OrderTile> ordertile;
     private Context context;
     private int lastAnimatedPosition = -1;
@@ -70,9 +73,9 @@ public class OrdersCardAdapter extends RecyclerView.Adapter<OrdersCardAdapter.Or
     public OrdersCardAdapter(Context context, List<OrderTile> ordertile) {
         this.ordertile = ordertile;
         this.context = context;
-        sharedPreference = new SharedPreference();
         merchantUidRef = FirebaseDatabase.getInstance().getReference().child("merchants");
         ordersDataBaseHelper = new DatabaseHelper(context);
+        sharedPreference = PreferenceManager.getDefaultSharedPreferences(context);
 
     }
 
@@ -261,7 +264,7 @@ public class OrdersCardAdapter extends RecyclerView.Adapter<OrdersCardAdapter.Or
 
 
                             star.setTag("starred");
-                            animateHeartButton(star);
+                            animateStarButton(star);
 
 
                             ordersDataBaseHelper.addStarredOrder(order);
@@ -340,9 +343,9 @@ public class OrdersCardAdapter extends RecyclerView.Adapter<OrdersCardAdapter.Or
                                 order_product_name, order_item_code, order_quantity, order_product_price, order_photo_id;
 
                         merchant_uid = pending_order.getMerchantUid();
-                        user_uid = MainActivity.get_user_uid();
-                        user_name = MainActivity.get_name();
-                        user_phone = MainActivity.get_phone();
+                        user_uid = sharedPreference.getString(ConstantStrings.USER_UID, null);
+                        user_name = sharedPreference.getString(ConstantStrings.USER_NAME, null);
+                        user_phone = sharedPreference.getString(ConstantStrings.USERS_PHONE, null);
 
 
                         order_timestamp = pending_order.getTimestamp();
@@ -398,7 +401,7 @@ public class OrdersCardAdapter extends RecyclerView.Adapter<OrdersCardAdapter.Or
 
 
 
-    private void animateHeartButton(final ImageView  holder) {
+    private void animateStarButton(final ImageView  holder) {
         AnimatorSet animatorSet = new AnimatorSet();
 
         ObjectAnimator rotationAnim = ObjectAnimator.ofFloat(holder, "rotation", 0f, 360f);

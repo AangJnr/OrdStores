@@ -1,13 +1,17 @@
+/*
 package com.shop.ordstore.signUpClasses;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
@@ -20,6 +24,7 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,9 +43,11 @@ import com.shop.ordstore.userClasses.User;
 import com.shop.ordstore.userClasses.MainActivity;
 
 
+*/
 /**
  * Created by AangJnr on 9/2/16.
- */
+ *//*
+
 public class UserSignUpFragment extends Fragment implements TextView.OnEditorActionListener{
     public static final String Prefs_Name = "user";
     public static final String UserId = "uidKey";
@@ -57,7 +64,8 @@ public class UserSignUpFragment extends Fragment implements TextView.OnEditorAct
     TextView bottomText;
     TextView bottomTextQuerry;
     Animation fadeIn, slideUp, fadeOut;
-    TextView login_fab;
+    TextView signIn;
+    RelativeLayout login_layout;
     ImageView ord, basket;
     boolean sign_in_activated = true;
     SharedPreferences user_prefs;
@@ -73,6 +81,8 @@ public class UserSignUpFragment extends Fragment implements TextView.OnEditorAct
 
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+
+
         }
 
         public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -80,10 +90,51 @@ public class UserSignUpFragment extends Fragment implements TextView.OnEditorAct
         }
 
         public void afterTextChanged(Editable s) {
-            if (s.length() == 0)
+            if (s.length() == 0 ) {
                 password_layout.setError("Not Entered");
-            else if (s.length() < 6)
+
+                try {
+                    login_layout.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.divider));
+                }
+                catch(NullPointerException e) {
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                        login_layout.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.divider));
+
+                    else
+                        login_layout.setBackgroundColor(getResources().getColor(R.color.divider));
+                }
+
+
+            }
+            else if (s.length() < 6) {
                 password_layout.setError("EASY");
+
+                try {
+                    login_layout.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.divider));
+                }
+                catch(NullPointerException e) {
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                        login_layout.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.divider));
+
+                    else
+                        login_layout.setBackgroundColor(getResources().getColor(R.color.divider));
+                }
+            }
+
+            
+            else if(s.length() == 6 && android.util.Patterns.EMAIL_ADDRESS.matcher(email_layout.getEditText().getText().toString()).matches()){
+                
+                try {
+                    login_layout.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorAccent));
+                }
+                catch(NullPointerException e) {
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                        login_layout.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorAccent));
+
+                    else
+                        login_layout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                }
+            }
             else if (s.length() < 10)
                 password_layout.setError("MEDIUM");
             else if (s.length() < 15)
@@ -123,7 +174,7 @@ public class UserSignUpFragment extends Fragment implements TextView.OnEditorAct
         fadeOut = AnimationUtils.loadAnimation(getContext(), R.anim.fade_out);
         slideUp = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up);
 
-
+        signIn = (TextView) rootView.findViewById(R.id.button_text);
         name_layout = (TextInputLayout) rootView.findViewById(R.id.user_username_layout);
         email_layout = (TextInputLayout) rootView.findViewById(R.id.user_email_layout);
         password_layout = (TextInputLayout) rootView.findViewById(R.id.user_password_layout);
@@ -139,7 +190,7 @@ public class UserSignUpFragment extends Fragment implements TextView.OnEditorAct
         bottomTextQuerry = (TextView) rootView.findViewById(R.id.bottom_text_querry);
 
 
-        login_fab = (TextView) rootView.findViewById(R.id.button_text);
+        login_layout = (RelativeLayout) rootView.findViewById(R.id.button_lay);
         bottomText = (TextView) rootView.findViewById(R.id.bottom_text);
 
         ord = (ImageView) rootView.findViewById(R.id.ord);
@@ -166,7 +217,7 @@ public class UserSignUpFragment extends Fragment implements TextView.OnEditorAct
         });
 
 
-        login_fab.setOnClickListener(new View.OnClickListener() {
+        signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 name = _nameText.getText().toString();
@@ -181,7 +232,7 @@ public class UserSignUpFragment extends Fragment implements TextView.OnEditorAct
 
                 } else if (!sign_in_activated) {
 
-                    _passwordText.addTextChangedListener(mTextEditorWatcher);
+                    //_passwordText.addTextChangedListener(mTextEditorWatcher);
                     signUp();
 
                 }
@@ -217,38 +268,11 @@ public class UserSignUpFragment extends Fragment implements TextView.OnEditorAct
         if (pendingIntroAnimation) {
             pendingIntroAnimation = false;
             startContentAnimation();
+            _passwordText.addTextChangedListener(mTextEditorWatcher);
         }
 
 
 
-
-        visibility = (ImageView) getActivity().findViewById(R.id.user_password_visibility_toggle);
-        visibility.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                int start, end;
-
-                if (!isPasswordVisible) {
-                    visibility.setImageResource(R.drawable.ic_visibility_white_24dp);
-                    start = _passwordText.getSelectionStart();
-                    end = _passwordText.getSelectionEnd();
-                    _passwordText.setTransformationMethod(null);
-                    _passwordText.setSelection(start, end);
-                    isPasswordVisible = true;
-
-                } else {
-                    visibility.setImageResource(R.drawable.ic_visibility_off_white_24dp);
-                    start = _passwordText.getSelectionStart();
-                    end = _passwordText.getSelectionEnd();
-                    _passwordText.setTransformationMethod(new PasswordTransformationMethod());
-                    _passwordText.setSelection(start, end);
-                    isPasswordVisible = false;
-                }
-
-
-            }
-        });
 
         _nameText.setOnEditorActionListener(this);
         _emailText.setOnEditorActionListener(this);
@@ -349,7 +373,7 @@ public class UserSignUpFragment extends Fragment implements TextView.OnEditorAct
             return;
         }
 
-        login_fab.setEnabled(false);
+        signIn.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setIndeterminate(true);
@@ -414,12 +438,8 @@ public class UserSignUpFragment extends Fragment implements TextView.OnEditorAct
                                                         progressDialog.dismiss();
                                                         Toast.makeText(getActivity(), "Error connecting to server", Toast.LENGTH_SHORT).show();
                                                     }
-
                                                 }
                                             });
-
-
-
                             } else {
                                 // Toast.makeText(getActivity(), "Oops! Something unexpected happened", Toast.LENGTH_LONG).show();
 
@@ -444,7 +464,7 @@ public class UserSignUpFragment extends Fragment implements TextView.OnEditorAct
             return;
         }
 
-        login_fab.setEnabled(false);
+        signIn.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setIndeterminate(true);
@@ -583,14 +603,16 @@ public class UserSignUpFragment extends Fragment implements TextView.OnEditorAct
     }
 
     public void onSignInSuccess() {
-        login_fab.setEnabled(true);
+        signIn.setEnabled(true);
         getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
         getActivity().finish();
-         /* Intent intent = new Intent(getActivity(), MainActivity.class);
+         */
+/* Intent intent = new Intent(getActivity(), MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-*/
+*//*
+
 
 
 
@@ -599,11 +621,11 @@ public class UserSignUpFragment extends Fragment implements TextView.OnEditorAct
     public void onSignInFailed() {
         Toast.makeText(getActivity(), "Login failed", Toast.LENGTH_LONG).show();
 
-        login_fab.setEnabled(true);
+        signIn.setEnabled(true);
     }
 
     public void onSignupSuccess() {
-        login_fab.setEnabled(true);
+        signIn.setEnabled(true);
         getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
         getActivity().finish();
 
@@ -613,7 +635,7 @@ public class UserSignUpFragment extends Fragment implements TextView.OnEditorAct
     public void onSignupFailed() {
         Toast.makeText(getActivity(), "Sign up failed", Toast.LENGTH_LONG).show();
 
-        login_fab.setEnabled(true);
+        signIn.setEnabled(true);
     }
 
     @Override
@@ -650,3 +672,4 @@ public class UserSignUpFragment extends Fragment implements TextView.OnEditorAct
 
 
 }
+*/
